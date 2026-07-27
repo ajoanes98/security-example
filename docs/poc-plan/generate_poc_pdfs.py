@@ -4,10 +4,12 @@
 from pathlib import Path
 
 from fpdf import FPDF
+from PIL import Image
 
 FONT_DIR = Path("/usr/share/fonts/truetype/dejavu")
 OUT_DIR = Path(__file__).resolve().parent
 ARTIFACT_DIR = Path("/opt/cursor/artifacts")
+DIAGRAM_PNG = OUT_DIR / "architecture-single-workflow.png"
 
 
 class PlanPDF(FPDF):
@@ -110,6 +112,107 @@ class PlanPDF(FPDF):
         self._write(f"{ac_label}: {ac}", 4.8)
         self.ln(2.5)
 
+    def architecture_section(self):
+        """Embed the single-workflow architecture diagram across as many pages as needed."""
+        if self.lang == "es":
+            self.h1("2. Arquitectura: un solo workflow con aprobaciones")
+            self.body(
+                "El recorrido completo (crear repositorio → añadir equipo → configurar "
+                "pipeline/variables → añadir workflow) se modela como una sola ejecución "
+                "de Port Workflow, con nodos INPUT de aprobación entre etapas de "
+                "Terraform plan/apply. La fase final usa una puerta de merge de PR "
+                "(o un INPUT de confirmación) en lugar del ciclo plan/apply."
+            )
+            self.bullet(
+                "Un solo run de workflow posee todo el recorrido; cada rombo es una "
+                "puerta humana."
+            )
+            self.bullet(
+                "Las fases 1–3 comparten el patrón: Port despacha GitHub Actions → "
+                "Terraform plan → INPUT de DevOps → apply."
+            )
+            self.bullet(
+                "La fase 4 permanece en el mismo workflow, pero la puerta es el merge "
+                "del PR (o un INPUT «confirmar merge»)."
+            )
+            self.bullet(
+                "Cualquier rechazo salta a notificar/fallar para no seguir aprovisionando."
+            )
+            caption = "Diagrama de arquitectura — workflow único en Port"
+            continued = "Diagrama de arquitectura (continuación)"
+        else:
+            self.h1("2. Architecture: single workflow with approvals")
+            self.body(
+                "The full journey (create repository → add team → configure "
+                "pipeline/env vars → add workflow) is modeled as one Port Workflow "
+                "run, with INPUT approval nodes between Terraform plan/apply stages. "
+                "The final phase uses a PR-merge gate (or a confirmation INPUT) "
+                "instead of the plan/apply loop."
+            )
+            self.bullet(
+                "One workflow run owns the whole journey; each diamond is a human gate."
+            )
+            self.bullet(
+                "Phases 1–3 share the same pattern: Port dispatches GitHub Actions → "
+                "Terraform plan → DevOps INPUT → apply."
+            )
+            self.bullet(
+                "Phase 4 still sits in the same workflow, but the gate is PR merge "
+                "(or an INPUT “confirm merged”)."
+            )
+            self.bullet(
+                "Decline from any approval jumps to notify/fail so provisioning stops."
+            )
+            caption = "Architecture diagram — single Port workflow"
+            continued = "Architecture diagram (continued)"
+
+        self._embed_tall_image(DIAGRAM_PNG, caption=caption, continued=continued)
+
+    def _embed_tall_image(self, image_path: Path, caption: str, continued: str):
+        if not image_path.exists():
+            self.body(f"[Diagram missing: {image_path.name}]")
+            return
+
+        img = Image.open(image_path)
+        img_w, img_h = img.size
+        page_w = self.epw
+        # Keep a little room for caption under each slice.
+        max_h = self.h - self.b_margin - self.t_margin - 28
+        # Pixel height that fits one page at full content width.
+        slice_px = int(img_w * (max_h / page_w))
+        slice_px = max(slice_px, 1)
+
+        tmp_dir = OUT_DIR / "_diagram_slices"
+        tmp_dir.mkdir(exist_ok=True)
+
+        y0 = 0
+        part = 0
+        while y0 < img_h:
+            y1 = min(y0 + slice_px, img_h)
+            # Avoid tiny leftover strips: absorb into previous if very small.
+            if img_h - y1 < slice_px * 0.12 and y1 < img_h:
+                y1 = img_h
+            crop = img.crop((0, y0, img_w, y1))
+            part += 1
+            slice_path = tmp_dir / f"arch-slice-{part}.png"
+            crop.save(slice_path, format="PNG")
+
+            if part == 1:
+                self.ln(2)
+                self.set_font("DejaVu", "B", 10)
+                self.set_text_color(30, 70, 120)
+                self._write(caption, 6)
+            else:
+                self.add_page()
+                self.set_font("DejaVu", "B", 10)
+                self.set_text_color(30, 70, 120)
+                self._write(continued, 6)
+
+            display_h = page_w * ((y1 - y0) / img_w)
+            self.image(str(slice_path), x=self.l_margin, w=page_w, h=display_h)
+            self.ln(display_h + 2)
+            y0 = y1
+
 
 EN = {
     "filename": "port-poc-create-repo-pipeline-plan-en.pdf",
@@ -150,10 +253,13 @@ def build_english(pdf: PlanPDF):
     pdf.body(
         "Slice strategy: Build one vertical slice first (addRepository), then reuse the "
         "same plan→approve→apply skeleton for team and env vars. Treat addWorkflow "
-        "(PR merge) as a separate final slice."
+        "(PR merge) as a separate final slice — or keep it in the same workflow behind "
+        "a PR-merge / confirmation gate (see architecture)."
     )
 
-    pdf.h1("2. Implementation phases")
+    pdf.architecture_section()
+
+    pdf.h1("3. Implementation phases")
 
     pdf.h2("Phase 0 — Foundations")
     pdf.numbered(1, "Connect Port ↔ GitHub (Ocean / GitHub app).")
@@ -229,14 +335,14 @@ def build_english(pdf: PlanPDF):
         "Dashboard: provisioning requests, pending approvals, repository catalog.",
     )
 
-    pdf.h1("3. Suggested build order")
+    pdf.h1("4. Suggested build order")
     pdf.numbered(1, "A1–A3 + B1–B4 — smallest demo matching UML Phase 1.")
     pdf.numbered(2, "C1–C2 — proves the pattern is reusable.")
     pdf.numbered(3, "D1–D3 — proves secrets and pipeline configuration.")
     pdf.numbered(4, "E1–E3 — proves the different approval mechanism (PR).")
     pdf.numbered(5, "F1–F2 — polish for stakeholder demo.")
 
-    pdf.h1("4. Epics and user stories")
+    pdf.h1("5. Epics and user stories")
 
     pdf.h2("Epic A — Platform foundations")
     pdf.story_row(
@@ -349,13 +455,13 @@ def build_english(pdf: PlanPDF):
         "Port page/widget lists open INPUT approvals.",
     )
 
-    pdf.h1("5. Out of scope for POC")
+    pdf.h1("6. Out of scope for POC")
     pdf.bullet("Full GitHub Issue–based approval mirroring the UML (use Port INPUT first).")
     pdf.bullet("Multi-org / multi-cloud Terraform backends.")
     pdf.bullet("Automated chaining of all four phases into one click without intermediate confirmation.")
     pdf.bullet("Production RBAC hardening beyond “Member can request / DevOps team can approve”.")
 
-    pdf.h1("6. UML → Port construct mapping")
+    pdf.h1("7. UML → Port construct mapping")
     pdf.bullet("User addRepositorie(form) → Workflow SELF_SERVE_TRIGGER")
     pdf.bullet(
         "Port → GithubAPI createRepo → Indirect via Terraform in GHA "
@@ -378,7 +484,7 @@ def build_english(pdf: PlanPDF):
         "Port event/status update"
     )
 
-    pdf.h1("7. Demo script")
+    pdf.h1("8. Demo script")
     pdf.numbered(
         1,
         "Developer opens Create repository in Port and submits the form.",
@@ -394,7 +500,7 @@ def build_english(pdf: PlanPDF):
         "Developer runs Add workflow → PR opened → DevOps merges → Port shows complete.",
     )
 
-    pdf.h1("8. Risks to call out early")
+    pdf.h1("9. Risks to call out early")
     pdf.bullet(
         "Long-running async state: plan artifacts must be keyed by Port run ID so apply "
         "uses the correct plan."
@@ -428,10 +534,14 @@ def build_spanish(pdf: PlanPDF):
     pdf.body(
         "Estrategia de cortes: Construir primero un corte vertical (addRepository) y luego "
         "reutilizar el mismo esqueleto plan→aprobar→apply para equipos y variables de "
-        "entorno. Tratar addWorkflow (merge de PR) como un corte final separado."
+        "entorno. Tratar addWorkflow (merge de PR) como un corte final separado — o "
+        "mantenerlo en el mismo workflow detrás de una puerta de merge / confirmación "
+        "(ver arquitectura)."
     )
 
-    pdf.h1("2. Fases de implementación")
+    pdf.architecture_section()
+
+    pdf.h1("3. Fases de implementación")
 
     pdf.h2("Fase 0 — Fundamentos")
     pdf.numbered(1, "Conectar Port ↔ GitHub (Ocean / aplicación de GitHub).")
@@ -518,14 +628,14 @@ def build_spanish(pdf: PlanPDF):
         "catálogo de repositorios.",
     )
 
-    pdf.h1("3. Orden de construcción sugerido")
+    pdf.h1("4. Orden de construcción sugerido")
     pdf.numbered(1, "A1–A3 + B1–B4 — demo mínima alineada con la Fase 1 del UML.")
     pdf.numbered(2, "C1–C2 — demuestra que el patrón es reutilizable.")
     pdf.numbered(3, "D1–D3 — demuestra secretos y configuración de pipeline.")
     pdf.numbered(4, "E1–E3 — demuestra el mecanismo de aprobación distinto (PR).")
     pdf.numbered(5, "F1–F2 — pulido para la demo a stakeholders.")
 
-    pdf.h1("4. Épicas e historias de usuario")
+    pdf.h1("5. Épicas e historias de usuario")
 
     pdf.h2("Épica A — Fundamentos de plataforma")
     pdf.story_row(
@@ -654,7 +764,7 @@ def build_spanish(pdf: PlanPDF):
         "Una página/widget de Port lista las aprobaciones INPUT abiertas.",
     )
 
-    pdf.h1("5. Fuera de alcance del POC")
+    pdf.h1("6. Fuera de alcance del POC")
     pdf.bullet(
         "Aprobación completa basada en GitHub Issues espejando el UML "
         "(usar Port INPUT primero)."
@@ -669,7 +779,7 @@ def build_spanish(pdf: PlanPDF):
         "equipo DevOps puede aprobar”."
     )
 
-    pdf.h1("6. Mapeo UML → constructos de Port")
+    pdf.h1("7. Mapeo UML → constructos de Port")
     pdf.bullet("Usuario addRepositorie(form) → Workflow SELF_SERVE_TRIGGER")
     pdf.bullet(
         "Port → GithubAPI createRepo → Indirecto vía Terraform en GHA "
@@ -692,7 +802,7 @@ def build_spanish(pdf: PlanPDF):
         "actualización de evento/estado en Port"
     )
 
-    pdf.h1("7. Guion de demostración")
+    pdf.h1("8. Guion de demostración")
     pdf.numbered(
         1,
         "El desarrollador abre Crear repositorio en Port y envía el formulario.",
@@ -712,7 +822,7 @@ def build_spanish(pdf: PlanPDF):
         "Port muestra completado.",
     )
 
-    pdf.h1("8. Riesgos a señalar temprano")
+    pdf.h1("9. Riesgos a señalar temprano")
     pdf.bullet(
         "Estado asíncrono de larga duración: los artefactos del plan deben indexarse por "
         "el run ID de Port para que apply use el plan correcto."
@@ -742,6 +852,11 @@ def generate(lang: str, out_name: str, title: str, subtitle: str, meta: list[str
         path = directory / out_name
         pdf.output(str(path))
         print(f"Wrote {path}")
+    # Also publish the architecture diagram asset for download.
+    if DIAGRAM_PNG.exists():
+        artifact_png = ARTIFACT_DIR / DIAGRAM_PNG.name
+        artifact_png.write_bytes(DIAGRAM_PNG.read_bytes())
+        print(f"Wrote {artifact_png}")
 
 
 def main():
