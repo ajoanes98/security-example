@@ -1,0 +1,33 @@
+{
+  "identifier": "refresh_spacelift_token",
+  "title": "Refresh Spacelift Token",
+  "icon": "Git",
+  "description": "A self service action to refresh Spacelift token",
+  "trigger": {
+    "type": "self-service",
+    "operation": "CREATE",
+    "userInputs": {
+      "properties": {},
+      "required": [],
+      "order": []
+    }
+  },
+  "invocationMethod": {
+    "type": "WEBHOOK",
+    "url": "https://PLACEHOLDER.app.spacelift.io/graphql",
+    "agent": false,
+    "synchronized": true,
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "query": "mutation GetSpaceliftToken($id: ID!, $secret: String!) { apiKeyUser(id: $id, secret: $secret) { jwt } }",
+      "variables": {
+        "id": "{{.secrets.SPACELIFT_API_KEY_ID}}",
+        "secret": "{{.secrets.SPACELIFT_API_KEY_SECRET}}"
+      }
+    }
+  },
+  "requiredApproval": false
+}

@@ -1,0 +1,14 @@
+{
+  "identifier": "mock-spacelift-stack",
+  "title": "[MOCK] Demo Spacelift Stack",
+  "properties": {
+    "space": "",
+    "label": ["mock"],
+    "description": "Mock entity for Port self-service dropdown; not a real Spacelift stack",
+    "repository": "",
+    "state": "MOCK",
+    "git_provider": "",
+    "branch": ""
+  },
+  "relations": {}
+}

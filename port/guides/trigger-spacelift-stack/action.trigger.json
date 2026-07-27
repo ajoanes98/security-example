@@ -1,0 +1,45 @@
+{
+  "identifier": "trigger_spacelift_stack",
+  "title": "Trigger Spacelift Stack",
+  "icon": "Git",
+  "description": "A self service action to trigger Spacelift stack",
+  "trigger": {
+    "type": "self-service",
+    "operation": "CREATE",
+    "userInputs": {
+      "properties": {
+        "stack": {
+          "title": "Stack",
+          "icon": "DefaultProperty",
+          "type": "string",
+          "blueprint": "space_lift_stack",
+          "sort": {
+            "property": "$title",
+            "order": "ASC"
+          },
+          "format": "entity"
+        }
+      },
+      "required": ["stack"],
+      "order": ["stack"]
+    }
+  },
+  "invocationMethod": {
+    "type": "WEBHOOK",
+    "url": "https://PLACEHOLDER.app.spacelift.io/graphql",
+    "agent": false,
+    "synchronized": true,
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer {{.secrets.SPACELIFT_TOKEN}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "query": "mutation ($stackId: ID!) { runTrigger(stack: $stackId) { id title type state createdAt updatedAt branch triggeredBy driftDetection } }",
+      "variables": {
+        "stackId": "{{.inputs.stack.identifier}}"
+      }
+    }
+  },
+  "requiredApproval": false
+}
