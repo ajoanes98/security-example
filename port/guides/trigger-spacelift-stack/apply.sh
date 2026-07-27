@@ -56,8 +56,8 @@ api_json() {
 
 echo "==> Upsert blueprint space_lift_stack"
 if ! BP_RESP="$(api_json POST /blueprints "${SCRIPT_DIR}/blueprint.json")"; then
-  echo "POST create failed or already exists; applying PUT (full replace of provided document — schema matches guide create)"
-  BP_RESP="$(api_json PUT /blueprints/space_lift_stack "${SCRIPT_DIR}/blueprint.json")"
+  echo "POST create failed or already exists; PATCHing additively"
+  BP_RESP="$(api_json PATCH /blueprints/space_lift_stack "${SCRIPT_DIR}/blueprint.json")"
 fi
 echo "$BP_RESP" | jq '{ok, identifier: .blueprint.identifier, title: .blueprint.title}'
 echo "$BP_RESP" | jq -e '.ok == true' >/dev/null
