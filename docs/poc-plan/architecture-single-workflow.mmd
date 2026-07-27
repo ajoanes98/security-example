@@ -1,0 +1,104 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "primaryColor": "#e8f1fa",
+    "primaryTextColor": "#142846",
+    "primaryBorderColor": "#2864a0",
+    "lineColor": "#3d5a80",
+    "secondaryColor": "#f7f4ea",
+    "tertiaryColor": "#f0f4f8",
+    "fontFamily": "arial",
+    "fontSize": "14px"
+  },
+  "flowchart": { "curve": "basis", "htmlLabels": true, "padding": 12 }
+}}%%
+flowchart TB
+  subgraph Actors["Actors"]
+    User(["Developer"])
+    DevOps(["DevOps"])
+  end
+
+  subgraph Port["Port — single Workflow run"]
+    direction TB
+    Form["SELF_SERVE_TRIGGER<br/>Form: repo + team + pipeline + workflow"]
+
+    PlanRepo["INTEGRATION_ACTION<br/>Terraform plan — repository"]
+    ApprRepo{"INPUT<br/>Approve repo?"}
+    ApplyRepo["INTEGRATION_ACTION<br/>Terraform apply — repository"]
+
+    PlanTeam["INTEGRATION_ACTION<br/>Terraform plan — team"]
+    ApprTeam{"INPUT<br/>Approve team?"}
+    ApplyTeam["INTEGRATION_ACTION<br/>Terraform apply — team"]
+
+    PlanPipe["INTEGRATION_ACTION<br/>Terraform plan — pipeline / env"]
+    ApprPipe{"INPUT<br/>Approve pipeline?"}
+    ApplyPipe["INTEGRATION_ACTION<br/>Terraform apply — pipeline / env"]
+
+    OpenPR["INTEGRATION_ACTION<br/>Open PR with workflow files"]
+    ApprPR{"INPUT or PR merge gate"}
+    Done["UPSERT_ENTITY + notify<br/>sendStatus"]
+    Decline["Notify — declined / failed"]
+  end
+
+  subgraph GitHub["GitHub"]
+    ControlRepo["Control repo<br/>Terraform + workflow_dispatch"]
+    TF["Terraform plan → artifact → apply"]
+    TargetRepo["Target repository<br/>teams · envs · secrets"]
+    PR["Pull Request<br/>.github/workflows/*"]
+  end
+
+  subgraph Catalog["Port catalog"]
+    Entity["service / githubRepository<br/>provisioning status"]
+  end
+
+  User -->|submit form| Form
+  Form --> PlanRepo
+  PlanRepo -->|dispatch| ControlRepo
+  ControlRepo --> TF
+  TF -.->|reportWorkflowStatus| PlanRepo
+
+  PlanRepo --> ApprRepo
+  DevOps --> ApprRepo
+  ApprRepo -->|approve| ApplyRepo
+  ApprRepo -->|decline| Decline
+  ApplyRepo -->|dispatch| ControlRepo
+  ApplyRepo --> PlanTeam
+
+  PlanTeam --> ApprTeam
+  DevOps --> ApprTeam
+  ApprTeam -->|approve| ApplyTeam
+  ApprTeam -->|decline| Decline
+  ApplyTeam --> PlanPipe
+
+  PlanPipe --> ApprPipe
+  DevOps --> ApprPipe
+  ApprPipe -->|approve| ApplyPipe
+  ApprPipe -->|decline| Decline
+  ApplyPipe --> OpenPR
+
+  OpenPR --> PR
+  OpenPR --> ApprPR
+  DevOps -->|merge or confirm| ApprPR
+  ApprPR -->|success| Done
+  ApprPR -->|cancel| Decline
+
+  ApplyRepo -.-> TargetRepo
+  ApplyTeam -.-> TargetRepo
+  ApplyPipe -.-> TargetRepo
+  Done --> Entity
+  Done -->|status| User
+  Decline -->|status| User
+
+  classDef actor fill:#fff7e6,stroke:#b45309,color:#1f2937
+  classDef port fill:#e8f1fa,stroke:#2864a0,color:#142846
+  classDef gate fill:#fef3c7,stroke:#d97706,color:#1f2937
+  classDef gh fill:#f0fdf4,stroke:#15803d,color:#14532d
+  classDef cat fill:#f5f3ff,stroke:#6d28d9,color:#1f2937
+  classDef fail fill:#fee2e2,stroke:#b91c1c,color:#1f2937
+
+  class User,DevOps actor
+  class Form,PlanRepo,ApplyRepo,PlanTeam,ApplyTeam,PlanPipe,ApplyPipe,OpenPR,Done port
+  class ApprRepo,ApprTeam,ApprPipe,ApprPR gate
+  class ControlRepo,TF,TargetRepo,PR gh
+  class Entity cat
+  class Decline fail
