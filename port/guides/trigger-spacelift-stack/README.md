@@ -6,11 +6,13 @@ Port-as-code for [Trigger a Spacelift stack](https://docs.port.io/guides/all/tri
 
 | Resource | Identifier |
 |---|---|
-| Blueprint | `space_lift_stack` |
-| Mock entity | `mock-spacelift-stack` |
+| Blueprint | `space_lift_stack` (relations: `github_repository`, `service`, `owning_team`, `environment`) |
+| Mock entity | `mock-spacelift-stack` → repo/service `devops-capstone-project`, team `example_team`, env `staging` |
 | Self-service action | `trigger_spacelift_stack` |
 | Self-service action | `refresh_spacelift_token` |
 | Automation | `spacelift_token_refresh_sync` |
+
+Note: the repo relation is named `github_repository` because the blueprint already has a string property `repository` (identifiers must be unique across properties and relations).
 
 Spacelift GraphQL URLs are placeholders: `https://PLACEHOLDER.app.spacelift.io/graphql`.
 

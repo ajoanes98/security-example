@@ -5,10 +5,15 @@
     "space": "",
     "label": ["mock"],
     "description": "Mock entity for Port self-service dropdown; not a real Spacelift stack",
-    "repository": "",
+    "repository": "devops-capstone-project",
     "state": "MOCK",
-    "git_provider": "",
-    "branch": ""
+    "git_provider": "GITHUB",
+    "branch": "main"
   },
-  "relations": {}
+  "relations": {
+    "github_repository": "devops-capstone-project",
+    "service": "devops-capstone-project",
+    "owning_team": "example_team",
+    "environment": "staging"
+  }
 }
