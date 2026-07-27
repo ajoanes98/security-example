@@ -1,0 +1,32 @@
+{
+  "identifier": "spacelift_token_refresh_sync",
+  "title": "Refresh Spacelift Token",
+  "description": "Updates the Port secret with the new Spacelift jwt token",
+  "trigger": {
+    "type": "automation",
+    "event": {
+      "type": "RUN_UPDATED",
+      "actionIdentifier": "refresh_spacelift_token"
+    },
+    "condition": {
+      "type": "JQ",
+      "expressions": [
+        ".diff.after.status == \"SUCCESS\""
+      ],
+      "combinator": "and"
+    }
+  },
+  "invocationMethod": {
+    "type": "WEBHOOK",
+    "url": "https://api.port.io/v1/organization/secrets/SPACELIFT_TOKEN",
+    "agent": false,
+    "synchronized": true,
+    "method": "PATCH",
+    "headers": {},
+    "body": {
+      "secretValue": "{{ .event.diff.after.response.data.apiKeyUser.jwt  }}",
+      "description": "Refreshed Spacelift API token"
+    }
+  },
+  "publish": true
+}

@@ -1,0 +1,19 @@
+{
+  "identifier": "mock-spacelift-stack",
+  "title": "[MOCK] Demo Spacelift Stack",
+  "properties": {
+    "space": "",
+    "label": ["mock"],
+    "description": "Mock entity for Port self-service dropdown; not a real Spacelift stack",
+    "repository": "devops-capstone-project",
+    "state": "MOCK",
+    "git_provider": "GITHUB",
+    "branch": "main"
+  },
+  "relations": {
+    "github_repository": "devops-capstone-project",
+    "service": "devops-capstone-project",
+    "owning_team": "example_team",
+    "environment": "staging"
+  }
+}

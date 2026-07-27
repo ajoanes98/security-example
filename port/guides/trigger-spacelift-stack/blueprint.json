@@ -1,0 +1,76 @@
+{
+  "identifier": "space_lift_stack",
+  "title": "SpaceLift Stack",
+  "icon": "IaC",
+  "schema": {
+    "properties": {
+      "space": {
+        "type": "string",
+        "title": "Space"
+      },
+      "label": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "title": "Label"
+      },
+      "description": {
+        "type": "string",
+        "title": "Description"
+      },
+      "repository": {
+        "type": "string",
+        "title": "Repository"
+      },
+      "link": {
+        "icon": "DefaultProperty",
+        "type": "string",
+        "title": "Link",
+        "format": "url"
+      },
+      "state": {
+        "type": "string",
+        "title": "State"
+      },
+      "git_provider": {
+        "type": "string",
+        "title": "Git Provider"
+      },
+      "branch": {
+        "type": "string",
+        "title": "Branch"
+      }
+    },
+    "required": []
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "aggregationProperties": {},
+  "relations": {
+    "github_repository": {
+      "title": "Repository",
+      "target": "githubRepository",
+      "required": false,
+      "many": false
+    },
+    "service": {
+      "title": "Service",
+      "target": "service",
+      "required": false,
+      "many": false
+    },
+    "owning_team": {
+      "title": "Owning Team",
+      "target": "_team",
+      "required": false,
+      "many": false
+    },
+    "environment": {
+      "title": "Environment",
+      "target": "environment",
+      "required": false,
+      "many": false
+    }
+  }
+}
