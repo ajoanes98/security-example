@@ -35,7 +35,7 @@
           "properties": {
             "wrong_label_notes": {
               "type": "string",
-              "title": "¿Qué label está mal? (si aplica)",
+              "title": "\u00bfQu\u00e9 label est\u00e1 mal? (si aplica)",
               "description": "Required when declining for bad labels."
             },
             "corrected_labels": {
@@ -71,20 +71,10 @@
           }
         ],
         "responders": {
-          "users": ["REPLACE_FINOPS@example.com"]
-        },
-        "notifications": [
-          {
-            "type": "webhook",
-            "url": "https://example.com/port-hooks/finops/review-requested",
-            "method": "POST",
-            "body": {
-              "event": "finops_review_requested",
-              "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
-              "labels": "{{ .outputs.trigger.diff.after.properties.labels }}"
-            }
-          }
-        ]
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
+        }
       }
     },
     {
@@ -110,7 +100,7 @@
     },
     {
       "identifier": "mark_labels_invalid",
-      "title": "Marcar labels inválidos",
+      "title": "Marcar labels inv\u00e1lidos",
       "description": "Stops this run. Re-queue by setting status back to pending_finops after labels are fixed (self-service or manual entity edit).",
       "config": {
         "type": "UPSERT_ENTITY",
@@ -139,7 +129,7 @@
             },
             "billing_is_afp_central": {
               "type": "boolean",
-              "title": "¿Billing es AFP-Central?",
+              "title": "\u00bfBilling es AFP-Central?",
               "default": false,
               "description": "If true, project is marked J2C. If false, FinOps chooses j2c vs no-j2c next."
             },
@@ -154,7 +144,9 @@
               "title": "Umbral / alerta presupuestaria"
             }
           },
-          "required": ["billing_account"],
+          "required": [
+            "billing_account"
+          ],
           "buttons": [
             {
               "identifier": "continue",
@@ -172,19 +164,21 @@
           }
         ],
         "responders": {
-          "users": ["REPLACE_FINOPS@example.com"]
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
         }
       }
     },
     {
       "identifier": "check_afp_central",
-      "title": "¿Billing es AFP-Central?",
+      "title": "\u00bfBilling es AFP-Central?",
       "config": {
         "type": "CONDITION",
         "outlets": [
           {
             "identifier": "afp_central",
-            "title": "AFP-Central → J2C",
+            "title": "AFP-Central \u2192 J2C",
             "expression": ".outputs.assign_billing.responses[0].inputs.billing_is_afp_central == true"
           }
         ]
@@ -254,7 +248,7 @@
           "properties": {
             "approval_notes": {
               "type": "string",
-              "title": "Notas de aprobación"
+              "title": "Notas de aprobaci\u00f3n"
             }
           },
           "buttons": [
@@ -285,13 +279,15 @@
           }
         ],
         "responders": {
-          "users": ["REPLACE_FINOPS@example.com"]
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
         }
       }
     },
     {
       "identifier": "mark_approved",
-      "title": "Fin proceso FinOps → finops_approved",
+      "title": "Fin proceso FinOps \u2192 finops_approved",
       "description": "Status change starts provision_tf or provision_tf_j2c via event triggers.",
       "config": {
         "type": "UPSERT_ENTITY",

@@ -2,6 +2,12 @@
 
 Use this when transferring the template environment. Items marked **required** must be done before production; others can stay mocked for a sales/PoC demo.
 
+## 0. Region note
+
+This template defaults Port-to-Port webhook calls to **US** (`https://api.us.port.io`). For EU orgs, change those URLs to `https://api.port.io` before apply.
+
+INPUT `notifications` blocks were removed from the JSON — the US API rejected them with a bare 422. Use separate `WEBHOOK` notify nodes (already present) or Port’s UI notification settings instead.
+
 ## 1. Port org setup (required)
 
 - [ ] Create / choose the Port organization (EU vs US API URL).

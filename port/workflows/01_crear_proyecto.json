@@ -2,7 +2,7 @@
   "identifier": "crear_proyecto",
   "title": "Crear Proyecto",
   "icon": "Cloud",
-  "description": "Parent self-service: collect project request data, check if the project already exists in Port, create a cloud_project entity, and hand off to FinOps (status → pending_finops).",
+  "description": "Parent self-service: collect project request data, check if the project already exists in Port, create a cloud_project entity, and hand off to FinOps (status \u2192 pending_finops).",
   "category": "Crear Proyecto",
   "allowAnyoneToViewRuns": true,
   "nodes": [
@@ -11,7 +11,10 @@
       "config": {
         "type": "SELF_SERVE_TRIGGER",
         "permissions": {
-          "roles": ["Member", "Admin"]
+          "roles": [
+            "Member",
+            "Admin"
+          ]
         },
         "userInputs": {
           "properties": {
@@ -57,7 +60,12 @@
               "description": "For J2C this is often the j2c network; FinOps/TF may refine it."
             }
           },
-          "required": ["project_id", "title", "snow_request_number", "owner"],
+          "required": [
+            "project_id",
+            "title",
+            "snow_request_number",
+            "owner"
+          ],
           "order": [
             "project_id",
             "title",
@@ -78,7 +86,7 @@
       "description": "Search the Port catalog for an existing cloud_project with this identifier.",
       "config": {
         "type": "WEBHOOK",
-        "url": "https://api.port.io/v1/blueprints/cloud_project/entities/search",
+        "url": "https://api.us.port.io/v1/blueprints/cloud_project/entities/search",
         "method": "POST",
         "body": {
           "query": {
@@ -103,7 +111,7 @@
     },
     {
       "identifier": "check_exists",
-      "title": "¿Existe proyecto?",
+      "title": "\u00bfExiste proyecto?",
       "config": {
         "type": "CONDITION",
         "outlets": [
@@ -165,7 +173,7 @@
     {
       "identifier": "validate_external",
       "title": "Validar datos (external)",
-      "description": "CUSTOMER: optional external validator (SNOW, CMDB, naming policy). Expected JSON body response: {\"valid\": true|false, \"message\": \"...\"}. If unused, leave URL and keep onFailure continue — flow assumes valid when the call fails.",
+      "description": "CUSTOMER: optional external validator (SNOW, CMDB, naming policy). Expected JSON body response: {\"valid\": true|false, \"message\": \"...\"}. If unused, leave URL and keep onFailure continue \u2014 flow assumes valid when the call fails.",
       "config": {
         "type": "WEBHOOK",
         "url": "https://example.com/port-hooks/crear-proyecto/validate",
@@ -191,7 +199,7 @@
     },
     {
       "identifier": "check_valid",
-      "title": "¿Datos correctos?",
+      "title": "\u00bfDatos correctos?",
       "config": {
         "type": "CONDITION",
         "outlets": [
@@ -205,7 +213,7 @@
     },
     {
       "identifier": "request_more_info",
-      "title": "Solicitar información",
+      "title": "Solicitar informaci\u00f3n",
       "description": "Requester (or delegate) provides corrected data. CUSTOMER: set responders to the requestor pattern or a triage team.",
       "config": {
         "type": "INPUT",
@@ -228,7 +236,7 @@
           "buttons": [
             {
               "identifier": "resubmit",
-              "label": "Reenviar información",
+              "label": "Reenviar informaci\u00f3n",
               "variant": "PRIMARY"
             },
             {
@@ -253,23 +261,10 @@
           }
         ],
         "responders": {
-          "users": ["REPLACE_REQUESTER_OR_TRIAGE@example.com"]
-        },
-        "notifications": [
-          {
-            "type": "webhook",
-            "url": "https://example.com/port-hooks/crear-proyecto/need-more-info",
-            "method": "POST",
-            "headers": {
-              "Content-Type": "application/json"
-            },
-            "body": {
-              "event": "need_more_info",
-              "project_id": "{{ .outputs.trigger.project_id }}",
-              "validation_response": "{{ .outputs.validate_external.response }}"
-            }
-          }
-        ]
+          "users": [
+            "REPLACE_REQUESTER_OR_TRIAGE@example.com"
+          ]
+        }
       }
     },
     {
