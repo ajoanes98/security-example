@@ -1,0 +1,391 @@
+{
+  "identifier": "crear_proyecto",
+  "title": "Crear Proyecto",
+  "icon": "Cloud",
+  "description": "Parent self-service: collect project request data, check if the project already exists in Port, create a cloud_project entity, and hand off to FinOps (status → pending_finops).",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "permissions": {
+          "roles": ["Member", "Admin"]
+        },
+        "userInputs": {
+          "properties": {
+            "project_id": {
+              "type": "string",
+              "title": "Project ID",
+              "description": "Unique cloud project identifier (also used as the Port entity identifier)."
+            },
+            "title": {
+              "type": "string",
+              "title": "Project title"
+            },
+            "snow_request_number": {
+              "type": "string",
+              "title": "ServiceNow request #"
+            },
+            "requirement_number": {
+              "type": "string",
+              "title": "Requirement #"
+            },
+            "description": {
+              "type": "string",
+              "title": "Description"
+            },
+            "owner": {
+              "type": "string",
+              "format": "user",
+              "title": "Owner"
+            },
+            "leader": {
+              "type": "string",
+              "format": "user",
+              "title": "Leader / TL"
+            },
+            "labels": {
+              "type": "object",
+              "title": "Initial labels",
+              "description": "Customer-specific label map FinOps will validate."
+            },
+            "network": {
+              "type": "string",
+              "title": "Network (optional)",
+              "description": "For J2C this is often the j2c network; FinOps/TF may refine it."
+            }
+          },
+          "required": ["project_id", "title", "snow_request_number", "owner"],
+          "order": [
+            "project_id",
+            "title",
+            "snow_request_number",
+            "requirement_number",
+            "description",
+            "owner",
+            "leader",
+            "labels",
+            "network"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "search_existing",
+      "title": "Consultar si proyecto existe",
+      "description": "Search the Port catalog for an existing cloud_project with this identifier.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://api.port.io/v1/blueprints/cloud_project/entities/search",
+        "method": "POST",
+        "body": {
+          "query": {
+            "combinator": "and",
+            "rules": [
+              {
+                "property": "$identifier",
+                "operator": "=",
+                "value": "{{ .outputs.trigger.project_id }}"
+              }
+            ]
+          }
+        },
+        "synchronized": true,
+        "onFailure": "terminate"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "exists": "{{ (.result.response.data.entities | length) > 0 }}",
+        "entity_count": "{{ .result.response.data.entities | length }}"
+      }
+    },
+    {
+      "identifier": "check_exists",
+      "title": "¿Existe proyecto?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "exists",
+            "title": "Proyecto ya existe",
+            "expression": ".outputs.search_existing.exists == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "mark_already_exists",
+      "title": "Proyecto ya existe",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.project_id }}",
+          "title": "{{ .outputs.trigger.title }}",
+          "properties": {
+            "status": "already_exists",
+            "snow_request_number": "{{ .outputs.trigger.snow_request_number }}",
+            "requirement_number": "{{ .outputs.trigger.requirement_number }}",
+            "description": "{{ .outputs.trigger.description }}",
+            "owner": "{{ .outputs.trigger.owner }}",
+            "leader": "{{ .outputs.trigger.leader }}",
+            "labels": "{{ .outputs.trigger.labels }}",
+            "network": "{{ .outputs.trigger.network }}",
+            "requested_by": "{{ .workflowRun.trigger.by.email }}"
+          }
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "notify_already_exists",
+      "title": "Notify: project already exists",
+      "description": "CUSTOMER: point this webhook at ServiceNow/Slack/email. Safe to leave as placeholder (onFailure continue).",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/crear-proyecto/already-exists",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "event": "project_already_exists",
+          "project_id": "{{ .outputs.trigger.project_id }}",
+          "snow_request_number": "{{ .outputs.trigger.snow_request_number }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}",
+          "workflow_run_id": "{{ .workflowRun.id }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "validate_external",
+      "title": "Validar datos (external)",
+      "description": "CUSTOMER: optional external validator (SNOW, CMDB, naming policy). Expected JSON body response: {\"valid\": true|false, \"message\": \"...\"}. If unused, leave URL and keep onFailure continue — flow assumes valid when the call fails.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/crear-proyecto/validate",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project_id }}",
+          "title": "{{ .outputs.trigger.title }}",
+          "snow_request_number": "{{ .outputs.trigger.snow_request_number }}",
+          "labels": "{{ .outputs.trigger.labels }}",
+          "owner": "{{ .outputs.trigger.owner }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "valid": "{{ .result.response.data.valid // true }}"
+      }
+    },
+    {
+      "identifier": "check_valid",
+      "title": "¿Datos correctos?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "invalid",
+            "title": "Datos incorrectos",
+            "expression": ".outputs.validate_external.valid == false"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "request_more_info",
+      "title": "Solicitar información",
+      "description": "Requester (or delegate) provides corrected data. CUSTOMER: set responders to the requestor pattern or a triage team.",
+      "config": {
+        "type": "INPUT",
+        "description": "External validation failed. Provide corrected project data to continue.",
+        "userInputs": {
+          "properties": {
+            "corrected_project_id": {
+              "type": "string",
+              "title": "Corrected project ID"
+            },
+            "corrected_labels": {
+              "type": "object",
+              "title": "Corrected labels"
+            },
+            "notes": {
+              "type": "string",
+              "title": "Notes"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "resubmit",
+              "label": "Reenviar información",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "cancel",
+              "label": "Cancelar",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "resubmit",
+            "title": "Resubmit",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "cancel",
+            "title": "Cancel",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": ["REPLACE_REQUESTER_OR_TRIAGE@example.com"]
+        },
+        "notifications": [
+          {
+            "type": "webhook",
+            "url": "https://example.com/port-hooks/crear-proyecto/need-more-info",
+            "method": "POST",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "event": "need_more_info",
+              "project_id": "{{ .outputs.trigger.project_id }}",
+              "validation_response": "{{ .outputs.validate_external.response }}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "notify_cancelled",
+      "title": "Notify cancelled",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/crear-proyecto/cancelled",
+        "method": "POST",
+        "body": {
+          "event": "cancelled",
+          "project_id": "{{ .outputs.trigger.project_id }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "create_project",
+      "title": "Recopilar datos / crear entidad",
+      "description": "Creates the cloud_project entity and sets status pending_finops to start the FinOps subprocess.",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.project_id }}",
+          "title": "{{ .outputs.trigger.title }}",
+          "properties": {
+            "status": "pending_finops",
+            "snow_request_number": "{{ .outputs.trigger.snow_request_number }}",
+            "requirement_number": "{{ .outputs.trigger.requirement_number }}",
+            "description": "{{ .outputs.trigger.description }}",
+            "owner": "{{ .outputs.trigger.owner }}",
+            "leader": "{{ .outputs.trigger.leader }}",
+            "labels": "{{ .outputs.trigger.labels }}",
+            "network": "{{ .outputs.trigger.network }}",
+            "requested_by": "{{ .workflowRun.trigger.by.email }}",
+            "pipeline_status": "not_started",
+            "is_j2c": false
+          }
+        },
+        "onFailure": "terminate"
+      }
+    },
+    {
+      "identifier": "notify_finops",
+      "title": "Notify FinOps handoff",
+      "description": "CUSTOMER: Slack/email/ServiceNow that FinOps review is waiting. FinOps workflow also starts via ENTITY_UPDATED on pending_finops.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/crear-proyecto/handoff-finops",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "event": "pending_finops",
+          "project_id": "{{ .outputs.trigger.project_id }}",
+          "snow_request_number": "{{ .outputs.trigger.snow_request_number }}",
+          "labels": "{{ .outputs.trigger.labels }}",
+          "workflow_run_id": "{{ .workflowRun.id }}"
+        },
+        "onFailure": "continue"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "search_existing"
+    },
+    {
+      "sourceIdentifier": "search_existing",
+      "targetIdentifier": "check_exists"
+    },
+    {
+      "sourceIdentifier": "check_exists",
+      "targetIdentifier": "mark_already_exists",
+      "sourceOutletIdentifier": "exists"
+    },
+    {
+      "sourceIdentifier": "check_exists",
+      "targetIdentifier": "validate_external",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "mark_already_exists",
+      "targetIdentifier": "notify_already_exists"
+    },
+    {
+      "sourceIdentifier": "validate_external",
+      "targetIdentifier": "check_valid"
+    },
+    {
+      "sourceIdentifier": "check_valid",
+      "targetIdentifier": "request_more_info",
+      "sourceOutletIdentifier": "invalid"
+    },
+    {
+      "sourceIdentifier": "check_valid",
+      "targetIdentifier": "create_project",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "request_more_info",
+      "targetIdentifier": "create_project",
+      "sourceOutletIdentifier": "resubmit"
+    },
+    {
+      "sourceIdentifier": "request_more_info",
+      "targetIdentifier": "notify_cancelled",
+      "sourceOutletIdentifier": "cancel"
+    },
+    {
+      "sourceIdentifier": "create_project",
+      "targetIdentifier": "notify_finops"
+    }
+  ]
+}

@@ -1,0 +1,518 @@
+{
+  "identifier": "provision_tf_j2c",
+  "title": "Proceso TF J2C",
+  "icon": "Terraform",
+  "description": "J2C Terraform provisioning subprocess. Triggered when cloud_project becomes finops_approved and is_j2c is true. Includes j2c network in YAML webhook payload.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "EVENT_TRIGGER",
+        "event": {
+          "type": "ENTITY_UPDATED",
+          "blueprintIdentifier": "cloud_project"
+        },
+        "condition": {
+          "type": "JQ",
+          "combinator": "and",
+          "expressions": [
+            ".diff.after.properties.status == \"finops_approved\"",
+            ".diff.before.properties.status != \"finops_approved\"",
+            ".diff.after.properties.is_j2c == true"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "mark_provisioning",
+      "title": "Validar tipo proyecto J2C \u2192 provisioning_tf",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "provisioning_tf",
+            "pipeline_status": "running"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "traer_repositorio",
+      "title": "Traer repositorio",
+      "description": "CUSTOMER: clone/fetch TF monorepo or project template.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/fetch-repo",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true,
+          "requirement_number": "{{ .outputs.trigger.diff.after.properties.requirement_number }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "revisar_tf_existe",
+      "title": "Revisar que el proyecto no est\u00e9 en TF",
+      "description": "CUSTOMER: return {\"exists\": true|false}. Defaults to false if webhook not configured.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/check-exists",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "exists": "{{ .result.response.data.exists // false }}"
+      }
+    },
+    {
+      "identifier": "check_tf_exists",
+      "title": "\u00bfExiste en TF?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "exists",
+            "title": "Ya existe en TF",
+            "expression": ".outputs.revisar_tf_existe.exists == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "mark_tf_conflict",
+      "title": "Error: proyecto ya en TF",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "failed",
+            "pipeline_status": "failed",
+            "tf_plan_notes": "Project already present in Terraform inventory."
+          }
+        }
+      }
+    },
+    {
+      "identifier": "copiar_estructura",
+      "title": "Copiar estructura repo",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/copy-structure",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "agregar_yaml",
+      "title": "Agregar datos en YAML (red j2c)",
+      "description": "CUSTOMER: write project YAML and ensure j2c network is added.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/write-yaml",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true,
+          "network": "{{ .outputs.trigger.diff.after.properties.network }}",
+          "billing_account": "{{ .outputs.trigger.diff.after.properties.billing_account }}",
+          "labels": "{{ .outputs.trigger.diff.after.properties.labels }}",
+          "requirement_number": "{{ .outputs.trigger.diff.after.properties.requirement_number }}",
+          "network_policy": "j2c"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "commit_push",
+      "title": "Commit + Push (# requerimiento)",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/commit-push",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "requirement_number": "{{ .outputs.trigger.diff.after.properties.requirement_number }}",
+          "snow_request_number": "{{ .outputs.trigger.diff.after.properties.snow_request_number }}",
+          "message": "Add project {{ .outputs.trigger.diff.after.identifier }} ({{ .outputs.trigger.diff.after.properties.requirement_number }})"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "informar_ing_cloud",
+      "title": "Informar a Ing Cloud",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/notify-ing-cloud",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "event": "tf_plan_ready_for_review",
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "revisar_plan",
+      "title": "Revisar plan",
+      "description": "CUSTOMER: set responders to Ing Cloud engineers.",
+      "config": {
+        "type": "INPUT",
+        "description": "Review Terraform plan for {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "plan_notes": {
+              "type": "string",
+              "title": "Comentarios / problema"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "accept",
+              "label": "Aceptar plan",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "reject",
+              "label": "Rechazar plan",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "accept",
+            "title": "Accept",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "reject",
+            "title": "Reject",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": [
+            "REPLACE_ING_CLOUD@example.com"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "comentar_issue",
+      "title": "Comentar issue con problema",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/comment-issue",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "notes": "{{ .outputs.revisar_plan.responses[0].inputs.plan_notes }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "mark_needs_repair",
+      "title": "Marcar needs_tf_repair",
+      "description": "Use workflow reparar_plan_tf (or set status) to re-enter after YAML fixes.",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "needs_tf_repair",
+            "pipeline_status": "failed",
+            "tf_plan_notes": "{{ .outputs.revisar_plan.responses[0].inputs.plan_notes }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "ejecutar_pipeline",
+      "title": "Ejecuci\u00f3n pipeline",
+      "description": "CUSTOMER: trigger TF apply pipeline. Prefer async (synchronized false) + callback to Port node run when ready; template uses sync with continue.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/run-pipeline",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "succeeded": "{{ .result.response.data.succeeded // true }}"
+      }
+    },
+    {
+      "identifier": "check_pipeline",
+      "title": "\u00bfPipeline OK?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "ok",
+            "title": "Pipeline OK",
+            "expression": ".outputs.ejecutar_pipeline.succeeded == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "entregar_info",
+      "title": "Entregar informaci\u00f3n",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/deliver-info",
+        "method": "POST",
+        "body": {
+          "event": "infra_created",
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "mark_infra_created",
+      "title": "Validar infra creada \u2192 infra_created",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "infra_created",
+            "pipeline_status": "succeeded"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "ejecutar_manual",
+      "title": "Ejecutar manual (fallback)",
+      "description": "CUSTOMER: page Ing Cloud for manual apply.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf-j2c/manual-execute",
+        "method": "POST",
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": true
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "manual_confirm",
+      "title": "Confirmar ejecuci\u00f3n manual",
+      "config": {
+        "type": "INPUT",
+        "description": "Confirm manual pipeline/apply completed for {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "done",
+              "label": "Infra lista",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "failed",
+              "label": "Fall\u00f3",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "done",
+            "title": "Done",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "failed",
+            "title": "Failed",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": [
+            "REPLACE_ING_CLOUD@example.com"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "mark_failed",
+      "title": "Marcar failed",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "failed",
+            "pipeline_status": "failed"
+          }
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "mark_provisioning"
+    },
+    {
+      "sourceIdentifier": "mark_provisioning",
+      "targetIdentifier": "traer_repositorio"
+    },
+    {
+      "sourceIdentifier": "traer_repositorio",
+      "targetIdentifier": "revisar_tf_existe"
+    },
+    {
+      "sourceIdentifier": "revisar_tf_existe",
+      "targetIdentifier": "check_tf_exists"
+    },
+    {
+      "sourceIdentifier": "check_tf_exists",
+      "targetIdentifier": "mark_tf_conflict",
+      "sourceOutletIdentifier": "exists"
+    },
+    {
+      "sourceIdentifier": "check_tf_exists",
+      "targetIdentifier": "copiar_estructura",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "copiar_estructura",
+      "targetIdentifier": "agregar_yaml"
+    },
+    {
+      "sourceIdentifier": "agregar_yaml",
+      "targetIdentifier": "commit_push"
+    },
+    {
+      "sourceIdentifier": "commit_push",
+      "targetIdentifier": "informar_ing_cloud"
+    },
+    {
+      "sourceIdentifier": "informar_ing_cloud",
+      "targetIdentifier": "revisar_plan"
+    },
+    {
+      "sourceIdentifier": "revisar_plan",
+      "targetIdentifier": "ejecutar_pipeline",
+      "sourceOutletIdentifier": "accept"
+    },
+    {
+      "sourceIdentifier": "revisar_plan",
+      "targetIdentifier": "comentar_issue",
+      "sourceOutletIdentifier": "reject"
+    },
+    {
+      "sourceIdentifier": "comentar_issue",
+      "targetIdentifier": "mark_needs_repair"
+    },
+    {
+      "sourceIdentifier": "ejecutar_pipeline",
+      "targetIdentifier": "check_pipeline"
+    },
+    {
+      "sourceIdentifier": "check_pipeline",
+      "targetIdentifier": "entregar_info",
+      "sourceOutletIdentifier": "ok"
+    },
+    {
+      "sourceIdentifier": "check_pipeline",
+      "targetIdentifier": "ejecutar_manual",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "entregar_info",
+      "targetIdentifier": "mark_infra_created"
+    },
+    {
+      "sourceIdentifier": "ejecutar_manual",
+      "targetIdentifier": "manual_confirm"
+    },
+    {
+      "sourceIdentifier": "manual_confirm",
+      "targetIdentifier": "mark_infra_created",
+      "sourceOutletIdentifier": "done"
+    },
+    {
+      "sourceIdentifier": "manual_confirm",
+      "targetIdentifier": "mark_failed",
+      "sourceOutletIdentifier": "failed"
+    }
+  ]
+}

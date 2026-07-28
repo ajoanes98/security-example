@@ -1,0 +1,183 @@
+{
+  "identifier": "agregar_usuarios",
+  "title": "Agregar usuarios al proyecto",
+  "icon": "User",
+  "description": "Optional follow-on after project is ready (or earlier). Self-service form → Flujo de Seguridad webhook → deliver permissions. Surfaced on cloud_project bolt menu.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "permissions": {
+          "roles": ["Member", "Admin"]
+        },
+        "contexts": [
+          {
+            "on": "ENTITY",
+            "userInput": "project"
+          }
+        ],
+        "userInputs": {
+          "properties": {
+            "project": {
+              "type": "string",
+              "format": "entity",
+              "blueprint": "cloud_project",
+              "title": "Proyecto"
+            },
+            "users": {
+              "type": "array",
+              "title": "Usuarios",
+              "items": {
+                "type": "string",
+                "format": "user"
+              },
+              "description": "Users to grant on the project."
+            },
+            "roles": {
+              "type": "array",
+              "title": "Roles / permisos",
+              "items": {
+                "type": "string"
+              },
+              "description": "Customer-specific role names (e.g. viewer, editor, owner)."
+            },
+            "justification": {
+              "type": "string",
+              "title": "Justificación"
+            }
+          },
+          "required": ["project", "users", "roles"],
+          "order": ["project", "users", "roles", "justification"]
+        }
+      }
+    },
+    {
+      "identifier": "flujo_seguridad",
+      "title": "Flujo de Seguridad",
+      "description": "CUSTOMER: IAM / security automation that prepares permission grants.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/security/prepare-grants",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "users": "{{ .outputs.trigger.users }}",
+          "roles": "{{ .outputs.trigger.roles }}",
+          "justification": "{{ .outputs.trigger.justification }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "security_approval",
+      "title": "Aprobación Seguridad",
+      "description": "CUSTOMER: set responders to Security team. Skip by wiring webhook straight to deliver if fully automated.",
+      "config": {
+        "type": "INPUT",
+        "description": "Approve user grants for {{ .outputs.trigger.project }}.",
+        "userInputs": {
+          "properties": {
+            "notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "approve",
+              "label": "Entregar permisos",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "reject",
+              "label": "Rechazar",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "approve",
+            "title": "Approve",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "reject",
+            "title": "Reject",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": ["REPLACE_SECURITY@example.com"]
+        }
+      }
+    },
+    {
+      "identifier": "entregar_permisos",
+      "title": "Entregar permisos",
+      "description": "CUSTOMER: apply IAM bindings.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/security/deliver-permissions",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "users": "{{ .outputs.trigger.users }}",
+          "roles": "{{ .outputs.trigger.roles }}",
+          "approved_by": "{{ .outputs.security_approval.responses[0].submitterInfo.submittedBy }}",
+          "notes": "{{ .outputs.security_approval.responses[0].inputs.notes }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "notify_rejected",
+      "title": "Notify rejected",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/security/grants-rejected",
+        "method": "POST",
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "notes": "{{ .outputs.security_approval.responses[0].inputs.notes }}"
+        },
+        "onFailure": "continue"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "flujo_seguridad"
+    },
+    {
+      "sourceIdentifier": "flujo_seguridad",
+      "targetIdentifier": "security_approval"
+    },
+    {
+      "sourceIdentifier": "security_approval",
+      "targetIdentifier": "entregar_permisos",
+      "sourceOutletIdentifier": "approve"
+    },
+    {
+      "sourceIdentifier": "security_approval",
+      "targetIdentifier": "notify_rejected",
+      "sourceOutletIdentifier": "reject"
+    }
+  ]
+}
