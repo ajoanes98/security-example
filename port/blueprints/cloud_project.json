@@ -1,0 +1,129 @@
+{
+  "identifier": "cloud_project",
+  "title": "Cloud Project",
+  "icon": "Cloud",
+  "description": "GCP/cloud project lifecycle for the Crear Proyecto template. Status drives event-triggered subprocess workflows.",
+  "schema": {
+    "properties": {
+      "status": {
+        "type": "string",
+        "title": "Status",
+        "default": "draft",
+        "enum": [
+          "draft",
+          "pending_finops",
+          "labels_invalid",
+          "finops_approved",
+          "provisioning_tf",
+          "needs_tf_repair",
+          "infra_created",
+          "sre_onboarding",
+          "ready",
+          "already_exists",
+          "failed"
+        ],
+        "enumColors": {
+          "draft": "lightGray",
+          "pending_finops": "yellow",
+          "labels_invalid": "orange",
+          "finops_approved": "blue",
+          "provisioning_tf": "purple",
+          "needs_tf_repair": "orange",
+          "infra_created": "turquoise",
+          "sre_onboarding": "pink",
+          "ready": "green",
+          "already_exists": "red",
+          "failed": "red"
+        }
+      },
+      "snow_request_number": {
+        "type": "string",
+        "title": "ServiceNow request #"
+      },
+      "requirement_number": {
+        "type": "string",
+        "title": "Requirement #"
+      },
+      "description": {
+        "type": "string",
+        "title": "Description",
+        "format": "markdown"
+      },
+      "is_j2c": {
+        "type": "boolean",
+        "title": "Is J2C",
+        "default": false
+      },
+      "billing_account": {
+        "type": "string",
+        "title": "Billing account"
+      },
+      "billing_is_afp_central": {
+        "type": "boolean",
+        "title": "Billing is AFP-Central",
+        "default": false
+      },
+      "labels": {
+        "type": "object",
+        "title": "Labels"
+      },
+      "label_correction_notes": {
+        "type": "string",
+        "title": "Label correction notes"
+      },
+      "budget_alert_threshold": {
+        "type": "string",
+        "title": "Budget alert threshold"
+      },
+      "network": {
+        "type": "string",
+        "title": "Network"
+      },
+      "owner": {
+        "type": "string",
+        "title": "Owner",
+        "format": "user"
+      },
+      "leader": {
+        "type": "string",
+        "title": "Leader / TL",
+        "format": "user"
+      },
+      "repository_url": {
+        "type": "string",
+        "title": "Terraform repository",
+        "format": "url"
+      },
+      "tf_plan_notes": {
+        "type": "string",
+        "title": "TF plan notes"
+      },
+      "pipeline_status": {
+        "type": "string",
+        "title": "Pipeline status",
+        "enum": ["not_started", "running", "succeeded", "failed"],
+        "enumColors": {
+          "not_started": "lightGray",
+          "running": "yellow",
+          "succeeded": "green",
+          "failed": "red"
+        },
+        "default": "not_started"
+      },
+      "monitoring_json": {
+        "type": "string",
+        "title": "Monitoring JSON",
+        "format": "yaml"
+      },
+      "requested_by": {
+        "type": "string",
+        "title": "Requested by",
+        "format": "user"
+      }
+    },
+    "required": ["status"]
+  },
+  "calculationProperties": {},
+  "mirrorProperties": {},
+  "relations": {}
+}

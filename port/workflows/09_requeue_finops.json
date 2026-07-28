@@ -1,0 +1,67 @@
+{
+  "identifier": "requeue_finops",
+  "title": "Re-encolar FinOps (labels corregidos)",
+  "icon": "DefaultProperty",
+  "description": "After labels_invalid, requester/FinOps fixes labels and sets status back to pending_finops to re-trigger finops_aprobacion.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "permissions": {
+          "roles": ["Member", "Admin"]
+        },
+        "contexts": [
+          {
+            "on": "ENTITY",
+            "userInput": "project"
+          }
+        ],
+        "userInputs": {
+          "properties": {
+            "project": {
+              "type": "string",
+              "format": "entity",
+              "blueprint": "cloud_project",
+              "title": "Proyecto"
+            },
+            "labels": {
+              "type": "object",
+              "title": "Labels corregidos"
+            },
+            "notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "required": ["project", "labels"],
+          "order": ["project", "labels", "notes"]
+        }
+      }
+    },
+    {
+      "identifier": "update_and_requeue",
+      "title": "Actualizar labels → pending_finops",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.project }}",
+          "properties": {
+            "status": "pending_finops",
+            "labels": "{{ .outputs.trigger.labels }}",
+            "label_correction_notes": "{{ .outputs.trigger.notes }}"
+          }
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "update_and_requeue"
+    }
+  ]
+}

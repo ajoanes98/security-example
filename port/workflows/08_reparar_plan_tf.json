@@ -1,0 +1,94 @@
+{
+  "identifier": "reparar_plan_tf",
+  "title": "Reparar plan TF",
+  "icon": "Bug",
+  "description": "Re-entry after Ing Cloud rejects a TF plan. Updates YAML via customer webhook, then sets status back to finops_approved so provision_tf / provision_tf_j2c re-runs.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "permissions": {
+          "roles": ["Member", "Admin"]
+        },
+        "contexts": [
+          {
+            "on": "ENTITY",
+            "userInput": "project"
+          }
+        ],
+        "userInputs": {
+          "properties": {
+            "project": {
+              "type": "string",
+              "format": "entity",
+              "blueprint": "cloud_project",
+              "title": "Proyecto"
+            },
+            "repair_notes": {
+              "type": "string",
+              "title": "Qué se reparó"
+            },
+            "spec_yaml": {
+              "type": "string",
+              "format": "yaml",
+              "title": "YAML corregido (opcional)"
+            }
+          },
+          "required": ["project", "repair_notes"],
+          "order": ["project", "repair_notes", "spec_yaml"]
+        }
+      }
+    },
+    {
+      "identifier": "reparar_plan",
+      "title": "Reparar plan / Agregar datos en YAML",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/tf/repair-yaml",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "repair_notes": "{{ .outputs.trigger.repair_notes }}",
+          "spec_yaml": "{{ .outputs.trigger.spec_yaml }}",
+          "repaired_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "requeue_provisioning",
+      "title": "Re-encolar provisioning (finops_approved)",
+      "description": "Flips status to finops_approved so the matching TF event workflow starts again. is_j2c on the entity selects provision_tf vs provision_tf_j2c.",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.project }}",
+          "properties": {
+            "status": "finops_approved",
+            "pipeline_status": "not_started",
+            "tf_plan_notes": "{{ .outputs.trigger.repair_notes }}"
+          }
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "reparar_plan"
+    },
+    {
+      "sourceIdentifier": "reparar_plan",
+      "targetIdentifier": "requeue_provisioning"
+    }
+  ]
+}

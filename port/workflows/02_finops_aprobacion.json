@@ -1,0 +1,394 @@
+{
+  "identifier": "finops_aprobacion",
+  "title": "Proceso FinOps",
+  "icon": "DefaultProperty",
+  "description": "FinOps subprocess: review labels, assign billing account, set j2c vs no-j2c, capture budget alerts, approve. Triggered when cloud_project.status becomes pending_finops.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "EVENT_TRIGGER",
+        "event": {
+          "type": "ENTITY_UPDATED",
+          "blueprintIdentifier": "cloud_project"
+        },
+        "condition": {
+          "type": "JQ",
+          "combinator": "and",
+          "expressions": [
+            ".diff.after.properties.status == \"pending_finops\"",
+            ".diff.before.properties.status != \"pending_finops\""
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "review_labels",
+      "title": "Revisar datos / labels",
+      "description": "CUSTOMER: set responders to FinOps team emails (must be Port users).",
+      "config": {
+        "type": "INPUT",
+        "description": "Review delivered project data and labels for {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "wrong_label_notes": {
+              "type": "string",
+              "title": "\u00bfQu\u00e9 label est\u00e1 mal? (si aplica)",
+              "description": "Required when declining for bad labels."
+            },
+            "corrected_labels": {
+              "type": "object",
+              "title": "Labels corregidos (opcional)"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "labels_ok",
+              "label": "Labels correctos",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "labels_wrong",
+              "label": "Labels incorrectos",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "labels_ok",
+            "title": "OK",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "labels_wrong",
+            "title": "Wrong",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "correct_label",
+      "title": "Corregir label",
+      "description": "CUSTOMER: hook that applies label fixes in GCP/CMDB. Then entity is marked labels_invalid so a human can fix and re-queue.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/finops/correct-label",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "notes": "{{ .outputs.review_labels.responses[0].inputs.wrong_label_notes }}",
+          "corrected_labels": "{{ .outputs.review_labels.responses[0].inputs.corrected_labels }}",
+          "current_labels": "{{ .outputs.trigger.diff.after.properties.labels }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "mark_labels_invalid",
+      "title": "Marcar labels inv\u00e1lidos",
+      "description": "Stops this run. Re-queue by setting status back to pending_finops after labels are fixed (self-service or manual entity edit).",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "labels_invalid",
+            "label_correction_notes": "{{ .outputs.review_labels.responses[0].inputs.wrong_label_notes }}",
+            "labels": "{{ .outputs.review_labels.responses[0].inputs.corrected_labels // .outputs.trigger.diff.after.properties.labels }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "assign_billing",
+      "title": "Asignar Billing Account + alertas",
+      "config": {
+        "type": "INPUT",
+        "description": "Assign billing and budget alert thresholds for {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "billing_account": {
+              "type": "string",
+              "title": "Billing Account"
+            },
+            "billing_is_afp_central": {
+              "type": "boolean",
+              "title": "\u00bfBilling es AFP-Central?",
+              "default": false,
+              "description": "If true, project is marked J2C. If false, FinOps chooses j2c vs no-j2c next."
+            },
+            "force_j2c": {
+              "type": "boolean",
+              "title": "Marcar como J2C (si no es AFP-Central)",
+              "default": false,
+              "description": "Used when billing is not AFP-Central. Ignored when AFP-Central is true (always J2C)."
+            },
+            "budget_alert_threshold": {
+              "type": "string",
+              "title": "Umbral / alerta presupuestaria"
+            }
+          },
+          "required": [
+            "billing_account"
+          ],
+          "buttons": [
+            {
+              "identifier": "continue",
+              "label": "Continuar",
+              "variant": "PRIMARY"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "continue",
+            "title": "Continue",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "check_afp_central",
+      "title": "\u00bfBilling es AFP-Central?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "afp_central",
+            "title": "AFP-Central \u2192 J2C",
+            "expression": ".outputs.assign_billing.responses[0].inputs.billing_is_afp_central == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "mark_j2c_afp",
+      "title": "Marcar proyecto como j2c (AFP-Central)",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "is_j2c": true,
+            "billing_account": "{{ .outputs.assign_billing.responses[0].inputs.billing_account }}",
+            "billing_is_afp_central": true,
+            "budget_alert_threshold": "{{ .outputs.assign_billing.responses[0].inputs.budget_alert_threshold }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "mark_j2c_choice",
+      "title": "Marcar j2c / no-j2c (no AFP-Central)",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "is_j2c": "{{ .outputs.assign_billing.responses[0].inputs.force_j2c }}",
+            "billing_account": "{{ .outputs.assign_billing.responses[0].inputs.billing_account }}",
+            "billing_is_afp_central": false,
+            "budget_alert_threshold": "{{ .outputs.assign_billing.responses[0].inputs.budget_alert_threshold }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "deliver_budget_alert",
+      "title": "Entregar alerta presupuestaria",
+      "description": "CUSTOMER: create budget alert / thresholds in FinOps tooling.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/finops/budget-alert",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "billing_account": "{{ .outputs.assign_billing.responses[0].inputs.billing_account }}",
+          "budget_alert_threshold": "{{ .outputs.assign_billing.responses[0].inputs.budget_alert_threshold }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "approve",
+      "title": "Aprobar",
+      "config": {
+        "type": "INPUT",
+        "description": "Final FinOps approval for {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "approval_notes": {
+              "type": "string",
+              "title": "Notas de aprobaci\u00f3n"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "approve",
+              "label": "Aprobar",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "reject",
+              "label": "Rechazar",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "approve",
+            "title": "Approve",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "reject",
+            "title": "Reject",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": [
+            "REPLACE_FINOPS@example.com"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "mark_approved",
+      "title": "Fin proceso FinOps \u2192 finops_approved",
+      "description": "Status change starts provision_tf or provision_tf_j2c via event triggers.",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "finops_approved"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "mark_rejected",
+      "title": "FinOps rechazado",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "failed",
+            "label_correction_notes": "{{ .outputs.approve.responses[0].inputs.approval_notes }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "notify_approved",
+      "title": "Notify FinOps approved",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/finops/approved",
+        "method": "POST",
+        "body": {
+          "event": "finops_approved",
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}"
+        },
+        "onFailure": "continue"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "review_labels"
+    },
+    {
+      "sourceIdentifier": "review_labels",
+      "targetIdentifier": "correct_label",
+      "sourceOutletIdentifier": "labels_wrong"
+    },
+    {
+      "sourceIdentifier": "review_labels",
+      "targetIdentifier": "assign_billing",
+      "sourceOutletIdentifier": "labels_ok"
+    },
+    {
+      "sourceIdentifier": "correct_label",
+      "targetIdentifier": "mark_labels_invalid"
+    },
+    {
+      "sourceIdentifier": "assign_billing",
+      "targetIdentifier": "check_afp_central",
+      "sourceOutletIdentifier": "continue"
+    },
+    {
+      "sourceIdentifier": "check_afp_central",
+      "targetIdentifier": "mark_j2c_afp",
+      "sourceOutletIdentifier": "afp_central"
+    },
+    {
+      "sourceIdentifier": "check_afp_central",
+      "targetIdentifier": "mark_j2c_choice",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "mark_j2c_afp",
+      "targetIdentifier": "deliver_budget_alert"
+    },
+    {
+      "sourceIdentifier": "mark_j2c_choice",
+      "targetIdentifier": "deliver_budget_alert"
+    },
+    {
+      "sourceIdentifier": "deliver_budget_alert",
+      "targetIdentifier": "approve"
+    },
+    {
+      "sourceIdentifier": "approve",
+      "targetIdentifier": "mark_approved",
+      "sourceOutletIdentifier": "approve"
+    },
+    {
+      "sourceIdentifier": "approve",
+      "targetIdentifier": "mark_rejected",
+      "sourceOutletIdentifier": "reject"
+    },
+    {
+      "sourceIdentifier": "mark_approved",
+      "targetIdentifier": "notify_approved"
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "identifier": "agregar_infraestructura",
+  "title": "Agregar infraestructura",
+  "icon": "Cluster",
+  "description": "Optional follow-on: request additional infra on an existing cloud_project. Mirrors Flujo de creación de infra with Ing Cloud plan review.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "permissions": {
+          "roles": ["Member", "Admin"]
+        },
+        "contexts": [
+          {
+            "on": "ENTITY",
+            "userInput": "project"
+          }
+        ],
+        "userInputs": {
+          "properties": {
+            "project": {
+              "type": "string",
+              "format": "entity",
+              "blueprint": "cloud_project",
+              "title": "Proyecto"
+            },
+            "infra_type": {
+              "type": "string",
+              "title": "Tipo de infraestructura",
+              "enum": ["gke", "gce", "cloudsql", "gcs", "pubsub", "other"]
+            },
+            "network": {
+              "type": "string",
+              "title": "Red",
+              "description": "For J2C projects, typically the j2c network."
+            },
+            "requirement_number": {
+              "type": "string",
+              "title": "Requirement #"
+            },
+            "spec_yaml": {
+              "type": "string",
+              "format": "yaml",
+              "title": "Spec / datos YAML",
+              "description": "Customer-defined infra parameters."
+            },
+            "notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "required": ["project", "infra_type", "requirement_number"],
+          "order": [
+            "project",
+            "infra_type",
+            "network",
+            "requirement_number",
+            "spec_yaml",
+            "notes"
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "flujo_creacion_infra",
+      "title": "Flujo de creación de infra",
+      "description": "CUSTOMER: fetch repo, write YAML, commit/push for additive infra.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/infra/create",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "infra_type": "{{ .outputs.trigger.infra_type }}",
+          "network": "{{ .outputs.trigger.network }}",
+          "requirement_number": "{{ .outputs.trigger.requirement_number }}",
+          "spec_yaml": "{{ .outputs.trigger.spec_yaml }}",
+          "notes": "{{ .outputs.trigger.notes }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "informar_ing_cloud",
+      "title": "Informar a Ing Cloud",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/infra/notify-ing-cloud",
+        "method": "POST",
+        "body": {
+          "event": "additional_infra_plan_ready",
+          "project_id": "{{ .outputs.trigger.project }}",
+          "infra_type": "{{ .outputs.trigger.infra_type }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "revisar_plan",
+      "title": "Revisar plan",
+      "config": {
+        "type": "INPUT",
+        "description": "Review additive infra plan for {{ .outputs.trigger.project }} ({{ .outputs.trigger.infra_type }}).",
+        "userInputs": {
+          "properties": {
+            "plan_notes": {
+              "type": "string",
+              "title": "Comentarios"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "accept",
+              "label": "Aceptar plan",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "reject",
+              "label": "Rechazar plan",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "accept",
+            "title": "Accept",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "reject",
+            "title": "Reject",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": ["REPLACE_ING_CLOUD@example.com"]
+        }
+      }
+    },
+    {
+      "identifier": "run_pipeline",
+      "title": "Ejecución pipeline",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/infra/run-pipeline",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "infra_type": "{{ .outputs.trigger.infra_type }}",
+          "requirement_number": "{{ .outputs.trigger.requirement_number }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "succeeded": "{{ .result.response.data.succeeded // true }}"
+      }
+    },
+    {
+      "identifier": "check_pipeline",
+      "title": "¿Pipeline OK?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "ok",
+            "title": "OK",
+            "expression": ".outputs.run_pipeline.succeeded == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "entrega_infra",
+      "title": "Entrega de Infra",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/infra/deliver",
+        "method": "POST",
+        "body": {
+          "event": "infra_delivered",
+          "project_id": "{{ .outputs.trigger.project }}",
+          "infra_type": "{{ .outputs.trigger.infra_type }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "ejecutar_manual",
+      "title": "Ejecutar manual",
+      "config": {
+        "type": "INPUT",
+        "description": "Pipeline did not report success. Confirm manual delivery for {{ .outputs.trigger.project }}.",
+        "userInputs": {
+          "properties": {
+            "notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "done",
+              "label": "Entregado",
+              "variant": "PRIMARY"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "done",
+            "title": "Done",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": ["REPLACE_ING_CLOUD@example.com"]
+        }
+      }
+    },
+    {
+      "identifier": "notify_rejected",
+      "title": "Plan rechazado",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/infra/plan-rejected",
+        "method": "POST",
+        "body": {
+          "project_id": "{{ .outputs.trigger.project }}",
+          "notes": "{{ .outputs.revisar_plan.responses[0].inputs.plan_notes }}"
+        },
+        "onFailure": "continue"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "flujo_creacion_infra"
+    },
+    {
+      "sourceIdentifier": "flujo_creacion_infra",
+      "targetIdentifier": "informar_ing_cloud"
+    },
+    {
+      "sourceIdentifier": "informar_ing_cloud",
+      "targetIdentifier": "revisar_plan"
+    },
+    {
+      "sourceIdentifier": "revisar_plan",
+      "targetIdentifier": "run_pipeline",
+      "sourceOutletIdentifier": "accept"
+    },
+    {
+      "sourceIdentifier": "revisar_plan",
+      "targetIdentifier": "notify_rejected",
+      "sourceOutletIdentifier": "reject"
+    },
+    {
+      "sourceIdentifier": "run_pipeline",
+      "targetIdentifier": "check_pipeline"
+    },
+    {
+      "sourceIdentifier": "check_pipeline",
+      "targetIdentifier": "entrega_infra",
+      "sourceOutletIdentifier": "ok"
+    },
+    {
+      "sourceIdentifier": "check_pipeline",
+      "targetIdentifier": "ejecutar_manual",
+      "fallback": true
+    }
+  ]
+}

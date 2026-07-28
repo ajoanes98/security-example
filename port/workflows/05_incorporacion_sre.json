@@ -1,0 +1,365 @@
+{
+  "identifier": "incorporacion_sre",
+  "title": "Incorporación Flujo SRE",
+  "icon": "Alerts",
+  "description": "SRE onboarding after infra is created. For J2C: attach monitoring targets, generate monitoring JSON, SRE review. For non-J2C: notify + review then mark ready.",
+  "category": "Crear Proyecto",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "config": {
+        "type": "EVENT_TRIGGER",
+        "event": {
+          "type": "ENTITY_UPDATED",
+          "blueprintIdentifier": "cloud_project"
+        },
+        "condition": {
+          "type": "JQ",
+          "combinator": "and",
+          "expressions": [
+            ".diff.after.properties.status == \"infra_created\"",
+            ".diff.before.properties.status != \"infra_created\""
+          ]
+        }
+      }
+    },
+    {
+      "identifier": "mark_sre_onboarding",
+      "title": "Recopilar contexto → sre_onboarding",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "sre_onboarding"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "check_j2c",
+      "title": "¿Es j2c?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "j2c",
+            "title": "J2C path",
+            "expression": ".outputs.trigger.diff.after.properties.is_j2c == true"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "revisar_owner",
+      "title": "Revisar owner / líder / TL",
+      "description": "CUSTOMER: optional validation of ownership metadata before monitoring attaches.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/review-owner",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "owner": "{{ .outputs.trigger.diff.after.properties.owner }}",
+          "leader": "{{ .outputs.trigger.diff.after.properties.leader }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "attach_monitoring_j2c",
+      "title": "Atachar proyecto a Monitoring j2c",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/attach-monitoring-j2c",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "attach_gservicio",
+      "title": "Atachar proyecto Gservicio",
+      "description": "BPMN path labeled fsoto — CUSTOMER: map to the real monitoring/product attachment API.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/attach-gservicio",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "attachment": "gservicio"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "attach_invtransversal",
+      "title": "Atachar proyecto invtransversal",
+      "description": "BPMN path labeled cmartinez.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/attach-invtransversal",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "attachment": "invtransversal"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "attach_afp_monitoring",
+      "title": "Atachar proyecto AFP monitoring",
+      "description": "BPMN path labeled VGodoy.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/attach-afp-monitoring",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "attachment": "afp_monitoring"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "generar_json_monitoring",
+      "title": "Generar JSON básico de monitoring",
+      "description": "CUSTOMER: return {\"monitoring_json\": \"...\"} to store on the entity.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/generate-monitoring-json",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "owner": "{{ .outputs.trigger.diff.after.properties.owner }}",
+          "leader": "{{ .outputs.trigger.diff.after.properties.leader }}"
+        },
+        "synchronized": true,
+        "onFailure": "continue"
+      },
+      "variables": {
+        "response": "{{ .result.response }}",
+        "monitoring_json": "{{ .result.response.data.monitoring_json // \"# customer webhook not configured\" }}"
+      }
+    },
+    {
+      "identifier": "store_monitoring_json",
+      "title": "Guardar monitoring JSON",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "monitoring_json": "{{ .outputs.generar_json_monitoring.monitoring_json }}"
+          }
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "entrega_info_sre",
+      "title": "Entrega información SRE",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/notify-sre",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"customer_webhook_token\"] }}"
+        },
+        "body": {
+          "event": "sre_review_requested",
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}",
+          "is_j2c": "{{ .outputs.trigger.diff.after.properties.is_j2c }}"
+        },
+        "onFailure": "continue"
+      }
+    },
+    {
+      "identifier": "revisar_creacion",
+      "title": "Revisar creación",
+      "description": "CUSTOMER: set responders to SRE team.",
+      "config": {
+        "type": "INPUT",
+        "description": "SRE review for project {{ .outputs.trigger.diff.after.identifier }}.",
+        "userInputs": {
+          "properties": {
+            "review_notes": {
+              "type": "string",
+              "title": "Notas"
+            }
+          },
+          "buttons": [
+            {
+              "identifier": "approve",
+              "label": "Aprobar",
+              "variant": "PRIMARY"
+            },
+            {
+              "identifier": "reject",
+              "label": "Rechazar",
+              "variant": "DANGER"
+            }
+          ]
+        },
+        "outlets": [
+          {
+            "evaluationMethod": "button",
+            "identifier": "approve",
+            "title": "Approve",
+            "numOfResponders": 1
+          },
+          {
+            "evaluationMethod": "button",
+            "identifier": "reject",
+            "title": "Reject",
+            "numOfResponders": 1
+          }
+        ],
+        "responders": {
+          "users": ["REPLACE_SRE@example.com"]
+        }
+      }
+    },
+    {
+      "identifier": "mark_ready",
+      "title": "Proyecto ready",
+      "description": "Project is ready. Users can run Agregar usuarios / Agregar infraestructura from the entity bolt menu.",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "ready"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "mark_failed",
+      "title": "SRE rechazó",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "cloud_project",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.diff.after.identifier }}",
+          "properties": {
+            "status": "failed",
+            "tf_plan_notes": "{{ .outputs.revisar_creacion.responses[0].inputs.review_notes }}"
+          }
+        }
+      }
+    },
+    {
+      "identifier": "non_j2c_notify",
+      "title": "Notify SRE (non-J2C)",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/sre/notify-sre-non-j2c",
+        "method": "POST",
+        "body": {
+          "event": "sre_review_requested_non_j2c",
+          "project_id": "{{ .outputs.trigger.diff.after.identifier }}"
+        },
+        "onFailure": "continue"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "sourceIdentifier": "trigger",
+      "targetIdentifier": "mark_sre_onboarding"
+    },
+    {
+      "sourceIdentifier": "mark_sre_onboarding",
+      "targetIdentifier": "check_j2c"
+    },
+    {
+      "sourceIdentifier": "check_j2c",
+      "targetIdentifier": "revisar_owner",
+      "sourceOutletIdentifier": "j2c"
+    },
+    {
+      "sourceIdentifier": "check_j2c",
+      "targetIdentifier": "non_j2c_notify",
+      "fallback": true
+    },
+    {
+      "sourceIdentifier": "revisar_owner",
+      "targetIdentifier": "attach_monitoring_j2c"
+    },
+    {
+      "sourceIdentifier": "attach_monitoring_j2c",
+      "targetIdentifier": "attach_gservicio"
+    },
+    {
+      "sourceIdentifier": "attach_gservicio",
+      "targetIdentifier": "attach_invtransversal"
+    },
+    {
+      "sourceIdentifier": "attach_invtransversal",
+      "targetIdentifier": "attach_afp_monitoring"
+    },
+    {
+      "sourceIdentifier": "attach_afp_monitoring",
+      "targetIdentifier": "generar_json_monitoring"
+    },
+    {
+      "sourceIdentifier": "generar_json_monitoring",
+      "targetIdentifier": "store_monitoring_json"
+    },
+    {
+      "sourceIdentifier": "store_monitoring_json",
+      "targetIdentifier": "entrega_info_sre"
+    },
+    {
+      "sourceIdentifier": "entrega_info_sre",
+      "targetIdentifier": "revisar_creacion"
+    },
+    {
+      "sourceIdentifier": "non_j2c_notify",
+      "targetIdentifier": "revisar_creacion"
+    },
+    {
+      "sourceIdentifier": "revisar_creacion",
+      "targetIdentifier": "mark_ready",
+      "sourceOutletIdentifier": "approve"
+    },
+    {
+      "sourceIdentifier": "revisar_creacion",
+      "targetIdentifier": "mark_failed",
+      "sourceOutletIdentifier": "reject"
+    }
+  ]
+}
