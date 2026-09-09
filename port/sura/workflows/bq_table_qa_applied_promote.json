@@ -1,0 +1,64 @@
+{
+  "identifier": "bq_table_qa_applied_promote",
+  "title": "Auto-solicitar promocion QA a Prod",
+  "icon": "BigQuery",
+  "description": "Cuando una tabla BigQuery pasa a applied en QA, dispara automaticamente el workflow promote_bq_table_to_prod (queda pendiente de aprobacion QA).",
+  "category": "AFP Datos",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "title": "Tabla aplicada en QA",
+      "config": {
+        "type": "EVENT_TRIGGER",
+        "event": {
+          "type": "ENTITY_UPDATED",
+          "blueprintIdentifier": "bq_table"
+        },
+        "condition": {
+          "type": "JQ",
+          "combinator": "and",
+          "expressions": [
+            ".diff.before.properties.provisioning_status != \"applied\"",
+            ".diff.after.properties.provisioning_status == \"applied\"",
+            ".diff.after.properties.environment == \"qa\""
+          ]
+        },
+        "published": true
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "trigger_promote_workflow",
+      "title": "Disparar promocion a produccion",
+      "description": "Invoca promote_bq_table_to_prod. Requiere secreto port_api_token cuando backend Port API este configurado.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://api.us.port.io/v1/workflows/promote_bq_table_to_prod/runs",
+        "synchronized": true,
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{ .secrets[\"port_api_token\"] }}"
+        },
+        "body": {
+          "inputs": {
+            "source_table": "{{ .outputs.trigger.diff.after.identifier }}",
+            "justification": "Promocion automatica solicitada al aplicarse la tabla en QA."
+          }
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    }
+  ],
+  "connections": [
+    { "sourceIdentifier": "trigger", "targetIdentifier": "trigger_promote_workflow" }
+  ]
+}

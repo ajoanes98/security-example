@@ -1,0 +1,157 @@
+{
+  "identifier": "promote_bq_table_to_prod",
+  "title": "Promover tabla a produccion",
+  "icon": "BigQuery",
+  "description": "Promueve una tabla BigQuery de QA a produccion. Requiere aprobacion del equipo QA. Disparable manualmente o automaticamente al aplicarse en QA.",
+  "category": "AFP Datos",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "title": "Promover tabla a produccion",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "actionCardButtonText": "Promover",
+        "executeActionButtonText": "Solicitar",
+        "published": true,
+        "permissions": { "roles": ["Member", "Admin"] },
+        "contexts": [
+          {
+            "on": "ENTITY",
+            "userInput": "source_table"
+          }
+        ],
+        "userInputs": {
+          "properties": {
+            "source_table": {
+              "type": "string",
+              "title": "Tabla origen (QA)",
+              "format": "entity",
+              "blueprint": "bq_table",
+              "dataset": {
+                "combinator": "and",
+                "rules": [
+                  { "property": "environment", "operator": "=", "value": "qa" },
+                  { "property": "provisioning_status", "operator": "=", "value": "applied" }
+                ]
+              }
+            },
+            "justification": {
+              "type": "string",
+              "title": "Justificacion",
+              "description": "Motivo de la promocion a produccion."
+            }
+          },
+          "required": ["source_table", "justification"]
+        }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "qa_approval",
+      "title": "Aprobacion equipo QA",
+      "config": {
+        "type": "INPUT",
+        "description": "Aprobar promocion a produccion de la tabla {{ .outputs.trigger.source_table }}. Justificacion: {{ .outputs.trigger.justification }}",
+        "userInputs": {
+          "properties": {
+            "approval_notes": {
+              "type": "string",
+              "title": "Notas de aprobacion"
+            }
+          },
+          "buttons": [
+            { "identifier": "approve", "label": "Aprobar promocion", "variant": "PRIMARY" },
+            { "identifier": "reject", "label": "Rechazar", "variant": "DANGER" }
+          ]
+        },
+        "outlets": [
+          { "evaluationMethod": "button", "identifier": "approve", "title": "Aprobado", "numOfResponders": 1 },
+          { "evaluationMethod": "button", "identifier": "reject", "title": "Rechazado", "numOfResponders": 1 }
+        ],
+        "responders": { "teams": ["qa"] }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "execute_prod",
+      "title": "Ejecutar en produccion",
+      "description": "PLACEHOLDER: manage-bq-table.yml con operation=create, environment=prod.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/bq-table/promote-prod",
+        "synchronized": true,
+        "method": "POST",
+        "body": {
+          "port_run_id": "{{ .workflowRun.id }}",
+          "operation": "create",
+          "environment": "prod",
+          "source_table": "{{ .outputs.trigger.source_table }}",
+          "justification": "{{ .outputs.trigger.justification }}",
+          "approval_notes": "{{ .outputs.qa_approval.responses[0].inputs.approval_notes }}",
+          "approved_by": "{{ .outputs.qa_approval.responses[0].by.email }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    },
+    {
+      "identifier": "register_prod_entity",
+      "title": "Registrar tabla en produccion",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "bq_table",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.source_table | gsub(\"$\"; \"\") }}-prod",
+          "title": "{{ .outputs.trigger.source_table }} (prod)",
+          "properties": {
+            "provisioning_status": "requested",
+            "environment": "prod"
+          },
+          "relations": {
+            "dataset": "{{ .outputs.trigger.source_table | split(\".\")[0] | gsub(\":qa\", \":prod\") }}"
+          }
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "notify_rejected",
+      "title": "Promocion rechazada",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/bq-table/promote-rejected",
+        "method": "POST",
+        "body": {
+          "event": "promotion_rejected",
+          "source_table": "{{ .outputs.trigger.source_table }}",
+          "notes": "{{ .outputs.qa_approval.responses[0].inputs.approval_notes }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    }
+  ],
+  "connections": [
+    { "sourceIdentifier": "trigger", "targetIdentifier": "qa_approval" },
+    { "sourceIdentifier": "qa_approval", "targetIdentifier": "execute_prod", "sourceOutletIdentifier": "approve" },
+    { "sourceIdentifier": "qa_approval", "targetIdentifier": "notify_rejected", "sourceOutletIdentifier": "reject" },
+    { "sourceIdentifier": "execute_prod", "targetIdentifier": "register_prod_entity" }
+  ]
+}
