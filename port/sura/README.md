@@ -34,7 +34,7 @@ Reutiliza: `githubOrganization`, `githubRepository` (integración GitHub existen
 - Datasets por proyecto (`raw_landing`, `curated`)
 - Células: `zenith`, `atlas`
 - Org GitHub: `gservicios-it`
-- ~10 tags FinOps representativos
+- **477 tags FinOps** cargados desde `u_tags_de_finops.xlsx` (ver `data/finops_tags.json`)
 
 ## Aplicar / actualizar desde código
 
