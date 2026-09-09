@@ -43,6 +43,7 @@ API_BASE = os.environ.get("PORT_API_URL", "https://api.us.port.io/v1")
 def canonical_id(value: str) -> str:
     v = value.strip().lower()
     v = v.replace("_", "-")
+    v = re.sub(r"\s+", "-", v)
     v = re.sub(r"-+", "-", v)
     return v
 
