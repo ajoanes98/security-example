@@ -1,0 +1,282 @@
+{
+  "identifier": "create_github_repository",
+  "title": "Crear repositorio GitHub",
+  "icon": "Github",
+  "description": "Crea un repositorio siguiendo nomenclatura y politicas AFP. Dry-run, aprobacion DevOps y ejecucion via agente (placeholder hasta conectar backend).",
+  "category": "AFP DevOps",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "title": "Crear repositorio GitHub",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "actionCardButtonText": "Solicitar",
+        "executeActionButtonText": "Enviar",
+        "published": true,
+        "permissions": { "roles": ["Member", "Admin"] },
+        "userInputs": {
+          "properties": {
+            "indique_nombre_de_proyecto": {
+              "type": "string",
+              "title": "Nombre completo del proyecto GCP",
+              "description": "Debe empezar con gcp-afp-. Ej: gcp-afp-poc-deloitte-cr-ms-agente",
+              "pattern": "^gcp-afp-[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "indique_organizacion_de_github": {
+              "type": "string",
+              "title": "Organizacion de GitHub",
+              "format": "entity",
+              "blueprint": "githubOrganization"
+            },
+            "ingrese_celula_de_desarrollo": {
+              "type": "string",
+              "title": "Celula de desarrollo",
+              "format": "entity",
+              "blueprint": "development_cell"
+            },
+            "seleccione_tipo_de_infraestructura": {
+              "type": "string",
+              "title": "Tipo de infraestructura",
+              "enum": ["cloud_run", "cloud_run_job", "cloud_function", "dataflow", "dataform", "api_gateway"],
+              "enumColors": {
+                "cloud_run": "blue",
+                "cloud_run_job": "turquoise",
+                "cloud_function": "green",
+                "dataflow": "orange",
+                "dataform": "purple",
+                "api_gateway": "pink"
+              }
+            },
+            "seleccione_opcion_cloudrun": {
+              "type": "string",
+              "title": "Opcion Cloud Run",
+              "enum": ["back", "front"],
+              "visible": { "jqQuery": ".form.seleccione_tipo_de_infraestructura == \"cloud_run\"" }
+            },
+            "descripcion_de_la_solicitud": {
+              "type": "string",
+              "title": "Descripcion de la solicitud",
+              "format": "markdown"
+            }
+          },
+          "required": [
+            "indique_nombre_de_proyecto",
+            "indique_organizacion_de_github",
+            "ingrese_celula_de_desarrollo",
+            "seleccione_tipo_de_infraestructura"
+          ],
+          "steps": [
+            {
+              "title": "Destino",
+              "order": ["indique_organizacion_de_github", "ingrese_celula_de_desarrollo"]
+            },
+            {
+              "title": "Infraestructura",
+              "order": ["seleccione_tipo_de_infraestructura", "seleccione_opcion_cloudrun"]
+            },
+            {
+              "title": "Identificacion",
+              "order": ["indique_nombre_de_proyecto", "descripcion_de_la_solicitud"]
+            }
+          ]
+        }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "dry_run",
+      "title": "Dry-run agente (validacion)",
+      "description": "PLACEHOLDER: conectar a gservicios-it/port-automations o Cloud Run agente. Espera JSON {approved, resolved_repo_name, reason}.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/create-repo/dry-run",
+        "agent": false,
+        "synchronized": true,
+        "method": "POST",
+        "headers": { "Content-Type": "application/json" },
+        "body": {
+          "port_run_id": "{{ .workflowRun.id }}",
+          "dry_run": true,
+          "number": "PORT-{{ .workflowRun.id }}",
+          "request_number": "PORT-{{ .workflowRun.id }}",
+          "short_description": "Crear repositorio {{ .outputs.trigger.indique_nombre_de_proyecto }}",
+          "variables": {
+            "indique_nombre_de_proyecto": "{{ .outputs.trigger.indique_nombre_de_proyecto }}",
+            "indique_organizacion_de_github": "{{ .outputs.trigger.indique_organizacion_de_github }}",
+            "ingrese_celula_de_desarrollo": "{{ .outputs.trigger.ingrese_celula_de_desarrollo }}",
+            "seleccione_tipo_de_infraestructura": "{{ .outputs.trigger.seleccione_tipo_de_infraestructura }}",
+            "seleccione_opcion_cloudrun": "{{ .outputs.trigger.seleccione_opcion_cloudrun }}",
+            "descripcion_de_la_solicitud": "{{ .outputs.trigger.descripcion_de_la_solicitud }}"
+          },
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "onTimeout": "fail",
+        "onFailure": "continue"
+      },
+      "variables": {
+        "approved": "{{ .result.response.data.approved // true }}",
+        "resolved_repo_name": "{{ .result.response.data.resolved_repo_name // \"\" }}",
+        "reason": "{{ .result.response.data.reason // \"\" }}"
+      },
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    },
+    {
+      "identifier": "check_dry_run",
+      "title": "Resultado dry-run",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "rejected",
+            "title": "Rechazado",
+            "expression": ".outputs.dry_run.approved == false"
+          }
+        ]
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "notify_rejected",
+      "title": "Notificar rechazo dry-run",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/create-repo/rejected",
+        "method": "POST",
+        "body": {
+          "event": "dry_run_rejected",
+          "port_run_id": "{{ .workflowRun.id }}",
+          "reason": "{{ .outputs.dry_run.reason }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "devops_approval",
+      "title": "Aprobacion DevOps",
+      "config": {
+        "type": "INPUT",
+        "description": "Revisar solicitud de repositorio. Nombre resuelto por dry-run: {{ .outputs.dry_run.resolved_repo_name // \"(pendiente validacion backend)\" }}",
+        "userInputs": {
+          "properties": {
+            "approval_notes": {
+              "type": "string",
+              "title": "Notas de aprobacion"
+            }
+          },
+          "buttons": [
+            { "identifier": "approve", "label": "Aprobar", "variant": "PRIMARY" },
+            { "identifier": "reject", "label": "Rechazar", "variant": "DANGER" }
+          ]
+        },
+        "outlets": [
+          { "evaluationMethod": "button", "identifier": "approve", "title": "Aprobado", "numOfResponders": 1 },
+          { "evaluationMethod": "button", "identifier": "reject", "title": "Rechazado", "numOfResponders": 1 }
+        ],
+        "responders": { "teams": ["devops"] }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "execute_create",
+      "title": "Ejecutar creacion (agente)",
+      "description": "PLACEHOLDER: GitHub Actions + WIF -> Cloud Run dry_run=false. Sustituir URL cuando backend este listo.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/create-repo/execute",
+        "agent": false,
+        "synchronized": true,
+        "method": "POST",
+        "headers": { "Content-Type": "application/json" },
+        "body": {
+          "port_run_id": "{{ .workflowRun.id }}",
+          "dry_run": false,
+          "number": "PORT-{{ .workflowRun.id }}",
+          "request_number": "PORT-{{ .workflowRun.id }}",
+          "resolved_repo_name": "{{ .outputs.dry_run.resolved_repo_name }}",
+          "variables": {
+            "indique_nombre_de_proyecto": "{{ .outputs.trigger.indique_nombre_de_proyecto }}",
+            "indique_organizacion_de_github": "{{ .outputs.trigger.indique_organizacion_de_github }}",
+            "ingrese_celula_de_desarrollo": "{{ .outputs.trigger.ingrese_celula_de_desarrollo }}",
+            "seleccione_tipo_de_infraestructura": "{{ .outputs.trigger.seleccione_tipo_de_infraestructura }}",
+            "seleccione_opcion_cloudrun": "{{ .outputs.trigger.seleccione_opcion_cloudrun }}",
+            "descripcion_de_la_solicitud": "{{ .outputs.trigger.descripcion_de_la_solicitud }}"
+          },
+          "approval_notes": "{{ .outputs.devops_approval.responses[0].inputs.approval_notes }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {
+        "pr_links": "{{ .result.response.data.pr_links // [] }}"
+      },
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    },
+    {
+      "identifier": "notify_complete",
+      "title": "Notificar PRs creados",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/create-repo/complete",
+        "method": "POST",
+        "body": {
+          "event": "prs_created",
+          "port_run_id": "{{ .workflowRun.id }}",
+          "pr_links": "{{ .outputs.execute_create.pr_links }}",
+          "summary": "2 PRs creados, pendientes de merge por DevOps."
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "notify_devops_rejected",
+      "title": "Solicitud rechazada por DevOps",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/create-repo/devops-rejected",
+        "method": "POST",
+        "body": {
+          "event": "devops_rejected",
+          "port_run_id": "{{ .workflowRun.id }}",
+          "notes": "{{ .outputs.devops_approval.responses[0].inputs.approval_notes }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    }
+  ],
+  "connections": [
+    { "sourceIdentifier": "trigger", "targetIdentifier": "dry_run" },
+    { "sourceIdentifier": "dry_run", "targetIdentifier": "check_dry_run" },
+    { "sourceIdentifier": "check_dry_run", "targetIdentifier": "notify_rejected", "sourceOutletIdentifier": "rejected" },
+    { "sourceIdentifier": "check_dry_run", "targetIdentifier": "devops_approval", "fallback": true },
+    { "sourceIdentifier": "devops_approval", "targetIdentifier": "execute_create", "sourceOutletIdentifier": "approve" },
+    { "sourceIdentifier": "devops_approval", "targetIdentifier": "notify_devops_rejected", "sourceOutletIdentifier": "reject" },
+    { "sourceIdentifier": "execute_create", "targetIdentifier": "notify_complete" }
+  ]
+}

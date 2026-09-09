@@ -1,0 +1,4295 @@
+[
+  {
+    "identifier": "op-codigo-activo:18-01-1420",
+    "title": "18-01-1420",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1420",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:veronica-alvear",
+    "title": "veronica_alvear",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "veronica_alvear",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asignacion-oficios",
+    "title": "asignacion_oficios",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asignacion_oficios",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:veronica-alvear",
+    "title": "veronica_alvear",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "veronica_alvear",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08th0000-a",
+    "title": "CL08TH0000_A",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08TH0000_A",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1360",
+    "title": "18-01-1360",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1360",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:yelitza-bustamante",
+    "title": "yelitza_bustamante",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "yelitza_bustamante",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:deposito-directo",
+    "title": "deposito_directo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "deposito_directo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:yelitza-bustamante",
+    "title": "yelitza_bustamante",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "yelitza_bustamante",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0988",
+    "title": "CL08PY0988",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY0988",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1419",
+    "title": "18-01-1419",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1419",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:motor-hiperpersonalizacion",
+    "title": "motor_hiperpersonalizacion",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "motor_hiperpersonalizacion",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py1018-g",
+    "title": "cl06py1018_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06py1018_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:inversiones-capas-agenticas",
+    "title": "inversiones-capas-agenticas",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "inversiones-capas-agenticas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:5120020007",
+    "title": "5120020007",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "5120020007",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:agente-afp",
+    "title": "agente-afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "agente-afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py1014-g",
+    "title": "CL08PY1014_G",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY1014_G",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1426",
+    "title": "18-01-1426",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1426",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:capital-intelligence",
+    "title": "capital_intelligence",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "capital_intelligence",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:spss",
+    "title": "SPSS",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "SPSS",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:esteban-ibarra",
+    "title": "Esteban_Ibarra",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "Esteban_Ibarra",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:validacion-identidad-it",
+    "title": "validacion-identidad-it",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "validacion-identidad-it",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:esteban-ibarra",
+    "title": "Esteban_Ibarra",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "Esteban_Ibarra",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:segmentador-usuarios-ad-it",
+    "title": "segmentador-usuarios-ad-it",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "segmentador-usuarios-ad-it",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0987-g",
+    "title": "CL08PY0987_G",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY0987_G",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-calidad-automatizacion",
+    "title": "afp_calidad_automatizacion",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp_calidad_automatizacion",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:migracion-workspace-one",
+    "title": "migracion_workspace_one",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "migracion_workspace_one",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:alejandra-romero",
+    "title": "alejandra_romero",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "alejandra_romero",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:tasa-retiro-programado",
+    "title": "tasa_retiro_programado",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "tasa_retiro_programado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py1025-g",
+    "title": "CL08PY1025_G",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY1025_G",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:alertas-fraude-automatizacion-spss",
+    "title": "alertas_fraude_automatizacion_spss",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "alertas_fraude_automatizacion_spss",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-citizendevelopers-coe",
+    "title": "afp-citizendevelopers-coe",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-citizendevelopers-coe",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bigquery-enterprise",
+    "title": "bigquery_enterprise",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bigquery_enterprise",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:ingreso-capital-uta-utm",
+    "title": "ingreso_capital_uta_utm",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "ingreso_capital_uta_utm",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:obtención-datos-para-rentabilidad-vs-aportes",
+    "title": "obtención_datos_para_rentabilidad_vs_aportes",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "obtención_datos_para_rentabilidad_vs_aportes",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:catalina-cerda",
+    "title": "catalina_cerda",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "catalina_cerda",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:filenet",
+    "title": "filenet",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "filenet",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:agentes-soporte-ia-it",
+    "title": "agentes-soporte-ia-it",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "agentes-soporte-ia-it",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1345",
+    "title": "18-01-1345",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1345",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:yanet-brito",
+    "title": "yanet_brito",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "yanet_brito",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:auditor-atenciones",
+    "title": "auditor-atenciones",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "auditor-atenciones",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:yanet-brito",
+    "title": "yanet_brito",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "yanet_brito",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:tex",
+    "title": "TEX",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "TEX",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0925",
+    "title": "18-01-0925",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0925",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:indicador-de-excelencia",
+    "title": "indicador_de_excelencia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "indicador_de_excelencia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:orlando-silva",
+    "title": "orlando_silva",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "orlando_silva",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:hector-sanhueza",
+    "title": "hector_sanhueza",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "hector_sanhueza",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py1026-g",
+    "title": "cl08py1026_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py1026_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1373",
+    "title": "18-01-1373",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1373",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:lpa-f9-f10",
+    "title": "LPA_F9_F10",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "LPA_F9_F10",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:reclamos-normativos-groot",
+    "title": "Reclamos_normativos_Groot",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "Reclamos_normativos_Groot",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:valeria-cofre",
+    "title": "valeria_cofre",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "valeria_cofre",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:dev",
+    "title": "dev",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "dev",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:1400000200",
+    "title": "1400000200",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "1400000200",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1280",
+    "title": "18-01-1280",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1280",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:ahmad-armoush",
+    "title": "ahmad_armoush",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "ahmad_armoush",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:interno",
+    "title": "Interno",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "Interno",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:web-afp",
+    "title": "web_afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "web_afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:ahmad-armoush",
+    "title": "ahmad_armoush",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "ahmad_armoush",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:qa",
+    "title": "qa",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "qa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06bu0056-g",
+    "title": "cl06bu0056_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06bu0056_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0839",
+    "title": "18-01-0839",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0839",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:arturo-godoy",
+    "title": "arturo_godoy",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "arturo_godoy",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:axity",
+    "title": "axity",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "axity",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:composer",
+    "title": "composer",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "composer",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:arturo-godoy",
+    "title": "arturo_godoy",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "arturo_godoy",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:preprod",
+    "title": "preprod",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "preprod",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py0811-g",
+    "title": "cl06py0811_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06py0811_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1111",
+    "title": "18-01-1111",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1111",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:ana-solar",
+    "title": "ana_solar",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "ana_solar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:clever-it",
+    "title": "clever-it",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "clever-it",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-data",
+    "title": "afp-data",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-data",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:ana-solar",
+    "title": "ana_solar",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "ana_solar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:prod",
+    "title": "prod",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "prod",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py0944-g",
+    "title": "cl06py0944_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06py0944_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1289",
+    "title": "18-01-1289",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1289",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:ann-anderson",
+    "title": "ann_anderson",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "ann_anderson",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:devsunited",
+    "title": "devsunited",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "devsunited",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bitacoras-automaticas",
+    "title": "bitacoras-automaticas",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bitacoras-automaticas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:ann-anderson",
+    "title": "ann_anderson",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "ann_anderson",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:sandbox",
+    "title": "sandbox",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "sandbox",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py0948-g",
+    "title": "cl06py0948_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06py0948_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1290",
+    "title": "18-01-1290",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1290",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:alejandra-veliz",
+    "title": "alejandra_veliz",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "alejandra_veliz",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:zenta-group",
+    "title": "zenta_group",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "zenta_group",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:toku",
+    "title": "toku",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "toku",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:alejandra-veliz",
+    "title": "alejandra_veliz",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "alejandra_veliz",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:dr",
+    "title": "dr",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "dr",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py0953-g",
+    "title": "cl06py0953_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06py0953_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:betty-rabanal",
+    "title": "betty_rabanal",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "betty_rabanal",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:it",
+    "title": "it",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "it",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:crm-estrategia-integral-relacionamiento",
+    "title": "crm_estrategia_integral_relacionamiento",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "crm_estrategia_integral_relacionamiento",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:betty-rabanal",
+    "title": "betty_rabanal",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "betty_rabanal",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:lab",
+    "title": "Lab",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "Lab",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06vs0224-a",
+    "title": "cl06vs0224_a",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl06vs0224_a",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:carlos-tamayo",
+    "title": "carlos_tamayo",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "carlos_tamayo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:itd",
+    "title": "itd",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "itd",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:estimador-masivo",
+    "title": "estimador-masivo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "estimador-masivo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carlos-tamayo",
+    "title": "carlos_tamayo",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carlos_tamayo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-ambiente:poc",
+    "title": "Poc",
+    "properties": {
+      "tag_key": "op-ambiente",
+      "tag_value": "Poc",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0592",
+    "title": "cl08py0592",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0592",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1279",
+    "title": "18-01-1279",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1279",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:carolina-cangas",
+    "title": "carolina_cangas",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "carolina_cangas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:octalia",
+    "title": "octalia",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "octalia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-8",
+    "title": "speech-analytics-8",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-8",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carolina-cangas",
+    "title": "carolina_cangas",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carolina_cangas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0815-g",
+    "title": "cl08py0815_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0815_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0516",
+    "title": "18-01-0516",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0516",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:camila-castro",
+    "title": "camila_castro",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "camila_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:seidor",
+    "title": "seidor",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "seidor",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-2",
+    "title": "speech-analytics-2",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-2",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:camila-castro",
+    "title": "camila_castro",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "camila_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0870",
+    "title": "cl08py0870",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0870",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0623",
+    "title": "18-01-0623",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0623",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cristobal-martinez",
+    "title": "cristobal_martinez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cristobal_martinez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:tipartner",
+    "title": "tipartner",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "tipartner",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-9",
+    "title": "speech-analytics-9",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-9",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cristobal-martinez",
+    "title": "cristobal_martinez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cristobal_martinez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0931-g",
+    "title": "cl08py0931_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0931_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0640",
+    "title": "18-01-0640",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0640",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cristian-moya",
+    "title": "cristian_moya",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cristian_moya",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:valis",
+    "title": "valis",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "valis",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-10",
+    "title": "speech-analytics-10",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-10",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cristian-moya",
+    "title": "cristian_moya",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cristian_moya",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0932-g",
+    "title": "cl08py0932_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0932_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0816",
+    "title": "18-01-0816",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0816",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cristian-paris",
+    "title": "cristian_paris",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cristian_paris",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:videsk",
+    "title": "videsk",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "videsk",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-11",
+    "title": "speech-analytics-11",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-11",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cristian-paris",
+    "title": "cristian_paris",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cristian_paris",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0935-g",
+    "title": "cl08py0935_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0935_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0990",
+    "title": "18-01-0990",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0990",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:danilo-quinteros",
+    "title": "danilo_quinteros",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "danilo_quinteros",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:zenta",
+    "title": "zenta",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "zenta",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:monitoreo-aa",
+    "title": "monitoreo-aa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "monitoreo-aa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:danilo-quinteros",
+    "title": "danilo_quinteros",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "danilo_quinteros",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:evelyn-soto",
+    "title": "evelyn_soto",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "evelyn_soto",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1301",
+    "title": "18-01-1301",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1301",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:matias-gonzalez",
+    "title": "matias_gonzalez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "matias_gonzalez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:web-asesor",
+    "title": "web-asesor",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "web-asesor",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:matias-gonzalez",
+    "title": "matias_gonzalez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "matias_gonzalez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-0992",
+    "title": "18-01-0992",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-0992",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:eduardo-munizaga",
+    "title": "eduardo_munizaga",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "eduardo_munizaga",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:kyndryl",
+    "title": "kyndryl",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "kyndryl",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:lpa-bpa",
+    "title": "lpa-bpa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "lpa-bpa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:eduardo-munizaga",
+    "title": "eduardo_munizaga",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "eduardo_munizaga",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0961-g",
+    "title": "cl08py0961_g",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08py0961_g",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1068",
+    "title": "18-01-1068",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1068",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:javier-vasquez",
+    "title": "javier_vasquez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "javier_vasquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:herencia-ia",
+    "title": "herencia-ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "herencia-ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:javier-vasquez",
+    "title": "javier_vasquez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "javier_vasquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08re0003-a",
+    "title": "cl08re0003_a",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08re0003_a",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1147",
+    "title": "18-01-1147",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1147",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:fernando-soto",
+    "title": "fernando_soto",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "fernando_soto",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:omni-documentos",
+    "title": "omni-documentos",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "omni-documentos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:fernando-soto",
+    "title": "fernando_soto",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "fernando_soto",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08vp0330-a",
+    "title": "cl08vp0330_a",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08vp0330_a",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1234",
+    "title": "18-01-1234",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1234",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:francisco-riquelme",
+    "title": "francisco_riquelme",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "francisco_riquelme",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:comision-medica-ia",
+    "title": "comision_medica_ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "comision_medica_ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:francisco-riquelme",
+    "title": "francisco_riquelme",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "francisco_riquelme",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08vs0206-a",
+    "title": "cl08vs0206_a",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "cl08vs0206_a",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1236",
+    "title": "18-01-1236",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1236",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:felipe-sandoval",
+    "title": "felipe_sandoval",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "felipe_sandoval",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:av-viteo",
+    "title": "av-viteo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "av-viteo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:felipe-sandoval",
+    "title": "felipe_sandoval",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "felipe_sandoval",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1244",
+    "title": "18-01-1244",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1244",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jacqueline-rubio",
+    "title": "jacqueline_rubio",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jacqueline_rubio",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:lpa-ia",
+    "title": "lpa-ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "lpa-ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jacqueline-rubio",
+    "title": "jacqueline_rubio",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jacqueline_rubio",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1248",
+    "title": "18-01-1248",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1248",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:janhisse-lataillade",
+    "title": "janhisse_lataillade",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "janhisse_lataillade",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:lpa-ia-fase8",
+    "title": "lpa-ia-fase8",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "lpa-ia-fase8",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:janhisse-lataillade",
+    "title": "janhisse_lataillade",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "janhisse_lataillade",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1249",
+    "title": "18-01-1249",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1249",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:javier-ubilla",
+    "title": "javier_ubilla",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "javier_ubilla",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:mandatos-ia",
+    "title": "mandatos-ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "mandatos-ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:javier-ubilla",
+    "title": "javier_ubilla",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "javier_ubilla",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1255",
+    "title": "18-01-1255",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1255",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jonathan-espinoza",
+    "title": "jonathan_espinoza",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jonathan_espinoza",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:mandatos-fiscalia",
+    "title": "mandatos-fiscalia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "mandatos-fiscalia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jonathan-espinoza",
+    "title": "jonathan_espinoza",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jonathan_espinoza",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1256",
+    "title": "18-01-1256",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1256",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jorge-sanhueza",
+    "title": "jorge_sanhueza",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jorge_sanhueza",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:docinversiones-ia",
+    "title": "docinversiones-ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "docinversiones-ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jorge-sanhueza",
+    "title": "jorge_sanhueza",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jorge_sanhueza",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1271",
+    "title": "18-01-1271",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1271",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jose-salgado",
+    "title": "jose_salgado",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jose_salgado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:automatizacion-ia-solicitud-poder-judicial",
+    "title": "automatizacion_ia_solicitud_poder_judicial",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "automatizacion_ia_solicitud_poder_judicial",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jose-salgado",
+    "title": "jose_salgado",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jose_salgado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1275",
+    "title": "18-01-1275",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1275",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jose-tapia",
+    "title": "jose_tapia",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jose_tapia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:sobrevivencia",
+    "title": "sobrevivencia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "sobrevivencia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jose-tapia",
+    "title": "jose_tapia",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jose_tapia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1278",
+    "title": "18-01-1278",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1278",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:luis-pizarro",
+    "title": "luis_pizarro",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "luis_pizarro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:genesysafp",
+    "title": "genesysafp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "genesysafp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:luis-pizarro",
+    "title": "luis_pizarro",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "luis_pizarro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1284",
+    "title": "18-01-1284",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1284",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:manuel-escobar",
+    "title": "manuel_escobar",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "manuel_escobar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:claraivr-agendamiento-videoatencion",
+    "title": "claraivr-agendamiento-videoatencion",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "claraivr-agendamiento-videoatencion",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:manuel-escobar",
+    "title": "manuel_escobar",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "manuel_escobar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1286",
+    "title": "18-01-1286",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1286",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:maria-lagos",
+    "title": "maria_lagos",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "maria_lagos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:formulario-contacto",
+    "title": "formulario-contacto",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "formulario-contacto",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:maria-lagos",
+    "title": "maria_lagos",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "maria_lagos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1296",
+    "title": "18-01-1296",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1296",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:miguel-brito",
+    "title": "miguel_brito",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "miguel_brito",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:informe-pensiones-personalizado",
+    "title": "informe_pensiones_personalizado",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "informe_pensiones_personalizado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:miguel-brito",
+    "title": "miguel_brito",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "miguel_brito",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1305",
+    "title": "18-01-1305",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1305",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:norma-gajardo",
+    "title": "norma_gajardo",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "norma_gajardo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:venta-remota-traspaso",
+    "title": "venta-remota-traspaso",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "venta-remota-traspaso",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:norma-gajardo",
+    "title": "norma_gajardo",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "norma_gajardo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1306",
+    "title": "18-01-1306",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1306",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:pablo-fernandez",
+    "title": "pablo_fernandez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "pablo_fernandez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:vra",
+    "title": "vra",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "vra",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:pablo-fernandez",
+    "title": "pablo_fernandez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "pablo_fernandez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1309",
+    "title": "18-01-1309",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1309",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:paula-castro",
+    "title": "paula_castro",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "paula_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:clave-dinamica-web-v2",
+    "title": "clave-dinamica-web-v2",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "clave-dinamica-web-v2",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:paula-castro",
+    "title": "paula_castro",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "paula_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1310",
+    "title": "18-01-1310",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1310",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:pedro-castillo",
+    "title": "pedro_castillo",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "pedro_castillo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:capitalpass",
+    "title": "capitalpass",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "capitalpass",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:pedro-castillo",
+    "title": "pedro_castillo",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "pedro_castillo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1314",
+    "title": "18-01-1314",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1314",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:pablo-castro",
+    "title": "pablo_castro",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "pablo_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:api-afp-pensionados",
+    "title": "api-afp-pensionados",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "api-afp-pensionados",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:pablo-castro",
+    "title": "pablo_castro",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "pablo_castro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1317",
+    "title": "18-01-1317",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1317",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:piera-robles",
+    "title": "piera_robles",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "piera_robles",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:sitio-publico-afp",
+    "title": "sitio-publico-afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "sitio-publico-afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:piera-robles",
+    "title": "piera_robles",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "piera_robles",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1318",
+    "title": "18-01-1318",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1318",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:ramon-ulloa",
+    "title": "ramon_ulloa",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "ramon_ulloa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:obsolescencia-tecnologica",
+    "title": "obsolescencia_tecnologica",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "obsolescencia_tecnologica",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:ramon-ulloa",
+    "title": "ramon_ulloa",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "ramon_ulloa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1319",
+    "title": "18-01-1319",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1319",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:rosa-matus",
+    "title": "rosa_matus",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "rosa_matus",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:epa-reintento-clara",
+    "title": "epa-reintento-clara",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "epa-reintento-clara",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rosa-matus",
+    "title": "rosa_matus",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "rosa_matus",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1321",
+    "title": "18-01-1321",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1321",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:robinson-reyes",
+    "title": "robinson_reyes",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "robinson_reyes",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:agendamiento-zeroq",
+    "title": "agendamiento-zeroq",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "agendamiento-zeroq",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:robinson-reyes",
+    "title": "robinson_reyes",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "robinson_reyes",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1322",
+    "title": "18-01-1322",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1322",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:rodrigo-bustamante",
+    "title": "rodrigo_bustamante",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "rodrigo_bustamante",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:ivr-epas-av-clara-ivr",
+    "title": "ivr-epas-av-clara-ivr",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "ivr-epas-av-clara-ivr",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rodrigo-bustamante",
+    "title": "rodrigo_bustamante",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "rodrigo_bustamante",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1323",
+    "title": "18-01-1323",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1323",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:valeska-godoy",
+    "title": "valeska_godoy",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "valeska_godoy",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualavatar",
+    "title": "asistentevirtualavatar",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualavatar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:valeska-godoy",
+    "title": "valeska_godoy",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "valeska_godoy",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1351",
+    "title": "18-01-1351",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1351",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:benjamin-rosso",
+    "title": "benjamin_rosso",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "benjamin_rosso",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:avclarapriv-v2",
+    "title": "avclarapriv-v2",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "avclarapriv-v2",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:benjamin-rosso",
+    "title": "benjamin_rosso",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "benjamin_rosso",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1374",
+    "title": "18-01-1374",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1374",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:carlos-perez",
+    "title": "carlos_perez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "carlos_perez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:josefina-v2",
+    "title": "josefina-v2",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "josefina-v2",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carlos-perez",
+    "title": "carlos_perez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carlos_perez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1380",
+    "title": "18-01-1380",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1380",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cristian-bruna",
+    "title": "cristian_bruna",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cristian_bruna",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:capital-search",
+    "title": "capital-search",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "capital-search",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cristian-bruna",
+    "title": "cristian_bruna",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cristian_bruna",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1384",
+    "title": "18-01-1384",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1384",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:claudio-bruna",
+    "title": "claudio_bruna",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "claudio_bruna",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:clara-unificada",
+    "title": "clara-unificada",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "clara-unificada",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:claudio-bruna",
+    "title": "claudio_bruna",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "claudio_bruna",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1387",
+    "title": "18-01-1387",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1387",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:constanza-valenzuela",
+    "title": "constanza_valenzuela",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "constanza_valenzuela",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:memorias-ia",
+    "title": "memorias_ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "memorias_ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:constanza-valenzuela",
+    "title": "constanza_valenzuela",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "constanza_valenzuela",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1388",
+    "title": "18-01-1388",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1388",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:carlos-delgado",
+    "title": "carlos_delgado",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "carlos_delgado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:researchlens",
+    "title": "researchlens",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "researchlens",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carlos-delgado",
+    "title": "carlos_delgado",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carlos_delgado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1391",
+    "title": "18-01-1391",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1391",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cristian-martinez",
+    "title": "cristian_martinez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cristian_martinez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:sabana-datos-av",
+    "title": "sabana-datos-av",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "sabana-datos-av",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cristian-martinez",
+    "title": "cristian_martinez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cristian_martinez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1394",
+    "title": "18-01-1394",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1394",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:diego-kother",
+    "title": "diego_kother",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "diego_kother",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:viteo",
+    "title": "viteo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "viteo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:diego-kother",
+    "title": "diego_kother",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "diego_kother",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-2024",
+    "title": "18-01-2024",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-2024",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:eduardo-vazquez",
+    "title": "eduardo_vazquez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "eduardo_vazquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualthviteo",
+    "title": "asistentevirtualthviteo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualthviteo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:eduardo-vazquez",
+    "title": "eduardo_vazquez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "eduardo_vazquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:franco-cardonne",
+    "title": "franco_cardonne",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "franco_cardonne",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:api-somos-comerciales",
+    "title": "api-somos-comerciales",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "api-somos-comerciales",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:franco-cardonne",
+    "title": "franco_cardonne",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "franco_cardonne",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:gema-atenas",
+    "title": "gema_atenas",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "gema_atenas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:apvc",
+    "title": "apvc",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "apvc",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:gema-atenas",
+    "title": "gema_atenas",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "gema_atenas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:hector-sanmartin",
+    "title": "hector_sanmartin",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "hector_sanmartin",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:webplataformafinanciera",
+    "title": "webplataformafinanciera",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "webplataformafinanciera",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:hector-sanmartin",
+    "title": "hector_sanmartin",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "hector_sanmartin",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:ismael-sanchez",
+    "title": "ismael_sanchez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "ismael_sanchez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:capital-conecta",
+    "title": "capital-conecta",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "capital-conecta",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:ismael-sanchez",
+    "title": "ismael_sanchez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "ismael_sanchez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jonathan-fuentes",
+    "title": "jonathan_fuentes",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jonathan_fuentes",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:vias-de-pago",
+    "title": "vias-de-pago",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "vias-de-pago",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jonathan-fuentes",
+    "title": "jonathan_fuentes",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jonathan_fuentes",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:lucas-caceres",
+    "title": "lucas_caceres",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "lucas_caceres",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:cuadratura",
+    "title": "cuadratura",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "cuadratura",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:lucas-caceres",
+    "title": "lucas_caceres",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "lucas_caceres",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:kather-campusano",
+    "title": "kather_campusano",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "kather_campusano",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:despacho-electronico",
+    "title": "despacho-electronico",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "despacho-electronico",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:kather-campusano",
+    "title": "kather_campusano",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "kather_campusano",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:lilian-zuniga",
+    "title": "lilian_zuniga",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "lilian_zuniga",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:plataforma-transversal",
+    "title": "plataforma-transversal",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "plataforma-transversal",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:lilian-zuniga",
+    "title": "lilian_zuniga",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "lilian_zuniga",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:macarena-argomedo",
+    "title": "macarena_argomedo",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "macarena_argomedo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:webafpbackoffices",
+    "title": "webafpbackoffices",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "webafpbackoffices",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:macarena-argomedo",
+    "title": "macarena_argomedo",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "macarena_argomedo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:maryori-rojas",
+    "title": "maryori_rojas",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "maryori_rojas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:otros-beneficios",
+    "title": "otros-beneficios",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "otros-beneficios",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:maryori-rojas",
+    "title": "maryori_rojas",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "maryori_rojas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:miguel-rodriguez",
+    "title": "miguel_rodriguez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "miguel_rodriguez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:pgu",
+    "title": "pgu",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "pgu",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:miguel-rodriguez",
+    "title": "miguel_rodriguez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "miguel_rodriguez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:maryorie-moreno",
+    "title": "maryorie_moreno",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "maryorie_moreno",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:solicitudes-poder-judicial",
+    "title": "solicitudes-poder-judicial",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "solicitudes-poder-judicial",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:maryorie-moreno",
+    "title": "maryorie_moreno",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "maryorie_moreno",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:matias-torres",
+    "title": "matias_torres",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "matias_torres",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:valorcuota",
+    "title": "valorcuota",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "valorcuota",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:matias-torres",
+    "title": "matias_torres",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "matias_torres",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:patricio-ibacache",
+    "title": "patricio_ibacache",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "patricio_ibacache",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualexternos",
+    "title": "asistentevirtualexternos",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualexternos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:patricio-ibacache",
+    "title": "patricio_ibacache",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "patricio_ibacache",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:raul-zala",
+    "title": "raul_zala",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "raul_zala",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualclarapublica",
+    "title": "asistentevirtualclarapublica",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualclarapublica",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:raul-zala",
+    "title": "raul_zala",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "raul_zala",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:rodrigo-araya",
+    "title": "rodrigo_araya",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "rodrigo_araya",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualjosefina",
+    "title": "asistentevirtualjosefina",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualjosefina",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rodrigo-araya",
+    "title": "rodrigo_araya",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "rodrigo_araya",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:rodrigo-rubilar",
+    "title": "rodrigo_rubilar",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "rodrigo_rubilar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:claraivr2-ia",
+    "title": "claraivr2-ia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "claraivr2-ia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rodrigo-rubilar",
+    "title": "rodrigo_rubilar",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "rodrigo_rubilar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:sonia-burgos",
+    "title": "sonia_burgos",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "sonia_burgos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:hosting-cartolas-cuatrimestral",
+    "title": "hosting_cartolas_cuatrimestral",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "hosting_cartolas_cuatrimestral",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:sonia-burgos",
+    "title": "sonia_burgos",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "sonia_burgos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:sofia-herrera",
+    "title": "sofia_herrera",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "sofia_herrera",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:viteo-campana",
+    "title": "viteo-campana",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "viteo-campana",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:sofia-herrera",
+    "title": "sofia_herrera",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "sofia_herrera",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:vanessa-becerra",
+    "title": "vanessa_becerra",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "vanessa_becerra",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:logrocket-galileo-ai",
+    "title": "logrocket-galileo-ai",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "logrocket-galileo-ai",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:vanessa-becerra",
+    "title": "vanessa_becerra",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "vanessa_becerra",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:vero-alvear",
+    "title": "vero_alvear",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "vero_alvear",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:omni-trackingpensiones",
+    "title": "omni-trackingpensiones",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "omni-trackingpensiones",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:vero-alvear",
+    "title": "vero_alvear",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "vero_alvear",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:valer-maldonado",
+    "title": "valer_maldonado",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "valer_maldonado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bitacora-scomp-cliente",
+    "title": "bitacora-scomp-cliente",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bitacora-scomp-cliente",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:valer-maldonado",
+    "title": "valer_maldonado",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "valer_maldonado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py1012-g",
+    "title": "CL08PY1012_G",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY1012_G",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:yasna-mendez",
+    "title": "yasna_mendez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "yasna_mendez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:orquestadorcomunicaciones",
+    "title": "orquestadorcomunicaciones",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "orquestadorcomunicaciones",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:yasna-mendez",
+    "title": "yasna_mendez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "yasna_mendez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:andres-vega",
+    "title": "andres_vega",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "andres_vega",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:saldos-consolidados-sgl",
+    "title": "saldos-consolidados-sgl",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "saldos-consolidados-sgl",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:andres-vega",
+    "title": "andres_vega",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "andres_vega",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:jose-arellano",
+    "title": "jose_arellano",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "jose_arellano",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:generador-pdf",
+    "title": "generador-pdf",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "generador-pdf",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:jose-arellano",
+    "title": "jose_arellano",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "jose_arellano",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:martin-rivas",
+    "title": "martin_rivas",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "martin_rivas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:rentabilidad-vs-aportes-carga-datos-firestore",
+    "title": "rentabilidad-vs-aportes-carga-datos-firestore",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "rentabilidad-vs-aportes-carga-datos-firestore",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:martin-rivas",
+    "title": "martin_rivas",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "martin_rivas",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:cesar-labbe",
+    "title": "cesar_labbe",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "cesar_labbe",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:segmentacion-cliente",
+    "title": "segmentacion_cliente",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "segmentacion_cliente",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:cesar-labbe",
+    "title": "cesar_labbe",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "cesar_labbe",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:carolina-nunez",
+    "title": "carolina_nunez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "carolina_nunez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:web-afp-asesor",
+    "title": "web-afp-asesor",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "web-afp-asesor",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carolina-nunez",
+    "title": "carolina_nunez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carolina_nunez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:karina-sepulveda",
+    "title": "karina_sepulveda",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "karina_sepulveda",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:multiretiro",
+    "title": "multiretiro",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "multiretiro",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:karina-sepulveda",
+    "title": "karina_sepulveda",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "karina_sepulveda",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:eduardo-vasquez",
+    "title": "eduardo_vasquez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "eduardo_vasquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:asistentevirtualitalo",
+    "title": "asistentevirtualitalo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "asistentevirtualitalo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:eduardo-vasquez",
+    "title": "eduardo_vasquez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "eduardo_vasquez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:av-italo-genesys",
+    "title": "av-italo-genesys",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "av-italo-genesys",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:carlos-milla",
+    "title": "carlos_milla",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "carlos_milla",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:valeria-maldonado",
+    "title": "valeria_maldonado",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "valeria_maldonado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:avatar",
+    "title": "avatar",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "avatar",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:valeria-maldonado",
+    "title": "valeria_maldonado",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "valeria_maldonado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:maria-riquelme",
+    "title": "maria_riquelme",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "maria_riquelme",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:resumen-ia-av",
+    "title": "resumen-ia-av",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "resumen-ia-av",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:maria-riquelme",
+    "title": "maria_riquelme",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "maria_riquelme",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:paloma-figueroa",
+    "title": "paloma_figueroa",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "paloma_figueroa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:hechos-esenciales",
+    "title": "hechos_esenciales",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "hechos_esenciales",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:paloma-figueroa",
+    "title": "paloma_figueroa",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "paloma_figueroa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:patricio-saez",
+    "title": "patricio_saez",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "patricio_saez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:seleccion-th",
+    "title": "seleccion-th",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "seleccion-th",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:patricio-saez",
+    "title": "patricio_saez",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "patricio_saez",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl08py0990-g",
+    "title": "CL08PY0990_G",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL08PY0990_G",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-codigo-activo:18-01-1435",
+    "title": "18-01-1435",
+    "properties": {
+      "tag_key": "op-codigo-activo",
+      "tag_value": "18-01-1435",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:dotacion-viteo",
+    "title": "dotacion-viteo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "dotacion-viteo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rconcha03@sura.cl",
+    "title": "rconcha03@sura.cl",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "rconcha03@sura.cl",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:gcp-afp-gserv-css-prod-01",
+    "title": "gcp-afp-gserv-css-prod-01",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "gcp-afp-gserv-css-prod-01",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-6",
+    "title": "speech-analytics-6",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-6",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-7",
+    "title": "speech-analytics-7",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-7",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:aladdin-blackrock-api",
+    "title": "aladdin-blackrock-api",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "aladdin-blackrock-api",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bloomberg-api",
+    "title": "bloomberg-api",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bloomberg-api",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:gestor-documental",
+    "title": "gestor-documental",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "gestor-documental",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:api-passthrough-geovictoria-nebula",
+    "title": "api-passthrough-geovictoria-nebula",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "api-passthrough-geovictoria-nebula",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:integracion-ifolder",
+    "title": "integracion-ifolder",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "integracion-ifolder",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:gestion-de-pagos",
+    "title": "gestion-de-pagos",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "gestion-de-pagos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:api-rrhh-colaboradores",
+    "title": "api-rrhh-colaboradores",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "api-rrhh-colaboradores",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:state-street",
+    "title": "state-street",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "state-street",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bus-de-servicio-th",
+    "title": "bus-de-servicio-th",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bus-de-servicio-th",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:kpi-orquestador-gh-api",
+    "title": "kpi-orquestador-gh-api",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "kpi-orquestador-gh-api",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:calendar-devops",
+    "title": "calendar-devops",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "calendar-devops",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-automatizacion-dev",
+    "title": "afp-automatizacion-dev",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-automatizacion-dev",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:automatizacion-tramite-herencia",
+    "title": "automatizacion_tramite_herencia",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "automatizacion_tramite_herencia",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-automatizacion-prod",
+    "title": "afp-automatizacion-prod",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-automatizacion-prod",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-automatizacion-qa",
+    "title": "afp-automatizacion-qa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-automatizacion-qa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bases-tablas-archivos-auditoria-afp",
+    "title": "bases_tablas_archivos_auditoria_afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bases_tablas_archivos_auditoria_afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-lider:rafael-berrios",
+    "title": "Rafael_Berrios",
+    "properties": {
+      "tag_key": "op-lider",
+      "tag_value": "Rafael_Berrios",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-5",
+    "title": "speech-analytics-5",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-5",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-responsable-negocio:rafael-berrios",
+    "title": "Rafael_Berrios",
+    "properties": {
+      "tag_key": "op-responsable-negocio",
+      "tag_value": "Rafael_Berrios",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:ntt",
+    "title": "NTT",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "NTT",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:poc",
+    "title": "poc",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "poc",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:saldos-consolidados-afp",
+    "title": "saldos_consolidados_afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "saldos_consolidados_afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:bitacora-sucursal",
+    "title": "bitacora_sucursal",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "bitacora_sucursal",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:datos-reforma",
+    "title": "datos_reforma",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "datos_reforma",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:datamart-venta",
+    "title": "datamart_venta",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "datamart_venta",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:automatizacion-campanas-seguridad",
+    "title": "automatizacion_campanas_seguridad",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "automatizacion_campanas_seguridad",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:upgradebi-mktcloud",
+    "title": "upgradebi_mktcloud",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "upgradebi_mktcloud",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:datossawa",
+    "title": "datossawa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "datossawa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:segmentacion-temprana",
+    "title": "segmentacion_temprana",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "segmentacion_temprana",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:migracion-gobierno",
+    "title": "migracion_gobierno",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "migracion_gobierno",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:estimador-pension-masivo",
+    "title": "estimador_pension_masivo",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "estimador_pension_masivo",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-3",
+    "title": "speech-analytics-3",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-3",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-4",
+    "title": "speech-analytics-4",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-4",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:reset-services-interconnect-fail",
+    "title": "reset-services-interconnect-fail",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "reset-services-interconnect-fail",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:customer-data-driven-centricity",
+    "title": "customer_data_driven_centricity",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "customer_data_driven_centricity",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:fugacliente",
+    "title": "fugacliente",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "fugacliente",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:segmento-empresa",
+    "title": "segmento_empresa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "segmento_empresa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:informe-pensiones",
+    "title": "informe-pensiones",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "informe-pensiones",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:operaciones-afp",
+    "title": "operaciones_afp",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "operaciones_afp",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-prov-dato-operaciones-dev",
+    "title": "afp-prov-dato-operaciones-dev",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-prov-dato-operaciones-dev",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-prov-dato-operaciones-prod",
+    "title": "afp-prov-dato-operaciones-prod",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-prov-dato-operaciones-prod",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-prov-dato-operaciones-qa",
+    "title": "afp-prov-dato-operaciones-qa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-prov-dato-operaciones-qa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:poc-celonis",
+    "title": "poc_celonis",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "poc_celonis",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:gcpcomercial",
+    "title": "gcpcomercial",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "gcpcomercial",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:regularizacioncmhbac",
+    "title": "regularizacioncmhbac",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "regularizacioncmhbac",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:indexador-individual",
+    "title": "indexador_individual",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "indexador_individual",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:rianeta",
+    "title": "rianeta",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "rianeta",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:sat47-consultas-registro-electoral-y-civil",
+    "title": "sat47-consultas-registro-electoral-y-civil",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "sat47-consultas-registro-electoral-y-civil",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:base-unica-th",
+    "title": "base_unica_th",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "base_unica_th",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:respaldos-aspect",
+    "title": "respaldos_aspect",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "respaldos_aspect",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:integración-equifax",
+    "title": "integración_equifax",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "integración_equifax",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:seguridad-it-prod",
+    "title": "seguridad-it-prod",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "seguridad-it-prod",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:rezago",
+    "title": "rezago",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "rezago",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:github-runner",
+    "title": "github-runner",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "github-runner",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:lpa",
+    "title": "lpa",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "lpa",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:calendariofestivos",
+    "title": "calendariofestivos",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "calendariofestivos",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:migracion-up-down",
+    "title": "migracion_up_down",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "migracion_up_down",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-13",
+    "title": "speech-analytics-13",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-13",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-12",
+    "title": "speech-analytics-12",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-12",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-15",
+    "title": "speech-analytics-15",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-15",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-14",
+    "title": "speech-analytics-14",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-14",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-17",
+    "title": "speech-analytics-17",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-17",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:speech-analytics-16",
+    "title": "speech-analytics-16",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "speech-analytics-16",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:numerificadorafpweb",
+    "title": "numerificadorafpweb",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "numerificadorafpweb",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:planificacion-financiera-cierre",
+    "title": "planificacion-financiera-cierre",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "planificacion-financiera-cierre",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:clave-dinamica",
+    "title": "clave-dinamica",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "clave-dinamica",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:smszeroq",
+    "title": "smszeroq",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "smszeroq",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:cross-clave-unica-v2",
+    "title": "cross-clave-unica-v2",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "cross-clave-unica-v2",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:comprobante-pago-consolidado",
+    "title": "comprobante-pago-consolidado",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "comprobante-pago-consolidado",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:politica-gestion-bucket",
+    "title": "politica-gestion-bucket",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "politica-gestion-bucket",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:api-transaccional-salesforce-marketing-cloud",
+    "title": "api_transaccional_salesforce_marketing_cloud",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "api_transaccional_salesforce_marketing_cloud",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:afp-capitapass",
+    "title": "afp-capitapass",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "afp-capitapass",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proyecto:invtransversal-data-dev",
+    "title": "invtransversal-data-dev",
+    "properties": {
+      "tag_key": "op-proyecto",
+      "tag_value": "invtransversal-data-dev",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-centrocosto:cl06py0991",
+    "title": "CL06PY0991",
+    "properties": {
+      "tag_key": "op-centrocosto",
+      "tag_value": "CL06PY0991",
+      "source": "servicenow"
+    }
+  },
+  {
+    "identifier": "op-proveedor:evolution labs",
+    "title": "Evolution Labs",
+    "properties": {
+      "tag_key": "op-proveedor",
+      "tag_value": "Evolution Labs",
+      "source": "servicenow"
+    }
+  }
+]

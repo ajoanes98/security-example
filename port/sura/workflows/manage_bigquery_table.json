@@ -1,0 +1,416 @@
+{
+  "identifier": "manage_bigquery_table",
+  "title": "Gestion de tabla BigQuery",
+  "icon": "BigQuery",
+  "description": "Crear, modificar, eliminar o revisar tablas BigQuery con validacion shift-left y ejecucion Terraform (placeholder backend CrossGH/bigquery-platform).",
+  "category": "AFP Datos",
+  "allowAnyoneToViewRuns": true,
+  "nodes": [
+    {
+      "identifier": "trigger",
+      "title": "Gestion de tabla BigQuery",
+      "config": {
+        "type": "SELF_SERVE_TRIGGER",
+        "actionCardButtonText": "Gestionar",
+        "executeActionButtonText": "Enviar",
+        "published": true,
+        "permissions": { "roles": ["Member", "Admin"] },
+        "userInputs": {
+          "properties": {
+            "operation": {
+              "type": "string",
+              "title": "Accion",
+              "enum": ["create", "modify", "delete", "review"],
+              "default": "create",
+              "enumColors": {
+                "create": "green",
+                "modify": "orange",
+                "delete": "red",
+                "review": "blue"
+              }
+            },
+            "gcp_project": {
+              "type": "string",
+              "title": "Proyecto GCP",
+              "format": "entity",
+              "blueprint": "gcp_project"
+            },
+            "environment": {
+              "type": "string",
+              "title": "Ambiente",
+              "enum": ["dev", "qa", "prod"]
+            },
+            "vb_arquitectura": {
+              "type": "string",
+              "title": "VB de Arquitectura",
+              "description": "Referencia o URL del visto bueno de Arquitectura (adjunto completo en fase 2)."
+            },
+            "dataset": {
+              "type": "string",
+              "title": "Dataset",
+              "format": "entity",
+              "blueprint": "bq_dataset",
+              "dataset": {
+                "combinator": "and",
+                "rules": [
+                  {
+                    "operator": "relatedTo",
+                    "blueprint": "gcp_project",
+                    "value": { "jqQuery": ".form.gcp_project" }
+                  }
+                ]
+              }
+            },
+            "table_name": {
+              "type": "string",
+              "title": "Nombre de la tabla",
+              "pattern": "^[a-z][a-z0-9_]{2,1023}$"
+            },
+            "table_type": {
+              "type": "string",
+              "title": "Tipo de tabla",
+              "enum": [
+                "no_partition",
+                "time_partition",
+                "range_partition",
+                "cluster_and_range",
+                "cluster_and_time",
+                "cluster",
+                "biglake_oracle",
+                "biglake_oracle_range",
+                "biglake_oracle_time"
+              ],
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "table_description": {
+              "type": "string",
+              "title": "Descripcion de la tabla",
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "partition_required": {
+              "type": "boolean",
+              "title": "Particion obligatoria?",
+              "visible": { "jqQuery": ".form.operation != \"delete\" and (.form.table_type | test(\"partition|range|time\"))" }
+            },
+            "partition_field": {
+              "type": "string",
+              "title": "Campo de particion",
+              "visible": { "jqQuery": ".form.operation != \"delete\" and (.form.table_type | test(\"partition|range|time\"))" }
+            },
+            "cluster_fields": {
+              "type": "array",
+              "title": "Campos de cluster",
+              "items": { "type": "string" },
+              "visible": { "jqQuery": ".form.operation != \"delete\" and (.form.table_type | test(\"cluster\"))" }
+            },
+            "table_schema": {
+              "type": "object",
+              "title": "Schema de la tabla",
+              "description": "JSON con name, type, mode, description y policy tags por campo.",
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_asset_owner": {
+              "type": "string",
+              "title": "op-asset-owner",
+              "format": "user",
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "ogd_origen_tabla": {
+              "type": "string",
+              "title": "ogd-origen-tabla",
+              "enum": [
+                "oracle_database",
+                "sql_server",
+                "bigquery",
+                "sybase_ase",
+                "sap_iq",
+                "cloud_sql",
+                "postgresql_gcp",
+                "otro"
+              ],
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_capa": {
+              "type": "string",
+              "title": "OP-Capa",
+              "enum": ["crudo", "curado", "produccion"],
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_centrocosto": {
+              "type": "string",
+              "title": "op-centrocosto",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-centrocosto" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_codigo_activo": {
+              "type": "string",
+              "title": "op-codigo-activo",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-codigo-activo" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_proyecto": {
+              "type": "string",
+              "title": "op-proyecto",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-proyecto" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_lider": {
+              "type": "string",
+              "title": "op-lider",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-lider" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_proveedor": {
+              "type": "string",
+              "title": "op-proveedor",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-proveedor" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            "op_responsable_negocio": {
+              "type": "string",
+              "title": "op-responsable-negocio",
+              "format": "entity",
+              "blueprint": "finops_tag",
+              "dataset": {
+                "combinator": "and",
+                "rules": [{ "property": "tag_key", "operator": "=", "value": "op-responsable-negocio" }]
+              },
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            }
+          },
+          "required": {
+            "jqQuery": "if .form.operation == \"delete\" then [\"operation\", \"gcp_project\", \"environment\", \"dataset\", \"table_name\"] else [\"operation\", \"gcp_project\", \"environment\", \"dataset\", \"table_name\", \"table_type\", \"table_schema\", \"op_capa\", \"op_centrocosto\", \"op_proyecto\"] end"
+          },
+          "steps": [
+            {
+              "title": "Datos de servicio",
+              "order": ["operation", "gcp_project", "environment", "vb_arquitectura"]
+            },
+            {
+              "title": "Datos de la tabla",
+              "order": [
+                "dataset",
+                "table_name",
+                "table_type",
+                "table_description",
+                "partition_required",
+                "partition_field",
+                "cluster_fields",
+                "table_schema"
+              ],
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            },
+            {
+              "title": "Detalle y tags FinOps",
+              "order": [
+                "op_asset_owner",
+                "ogd_origen_tabla",
+                "op_capa",
+                "op_centrocosto",
+                "op_codigo_activo",
+                "op_proyecto",
+                "op_lider",
+                "op_proveedor",
+                "op_responsable_negocio"
+              ],
+              "visible": { "jqQuery": ".form.operation != \"delete\"" }
+            }
+          ]
+        }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "register_request",
+      "title": "Registrar solicitud en catalogo",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "bq_table",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.dataset }}.{{ .outputs.trigger.table_name }}",
+          "title": "{{ .outputs.trigger.table_name }}",
+          "properties": {
+            "table_type": "{{ .outputs.trigger.table_type }}",
+            "description": "{{ .outputs.trigger.table_description }}",
+            "partition_required": "{{ .outputs.trigger.partition_required }}",
+            "table_schema": "{{ .outputs.trigger.table_schema }}",
+            "op_asset_owner": "{{ .outputs.trigger.op_asset_owner }}",
+            "ogd_origen_tabla": "{{ .outputs.trigger.ogd_origen_tabla }}",
+            "op_capa": "{{ .outputs.trigger.op_capa }}",
+            "provisioning_status": "requested",
+            "environment": "{{ .outputs.trigger.environment }}",
+            "requested_by": "{{ .workflowRun.trigger.by.email }}"
+          },
+          "relations": {
+            "dataset": "{{ .outputs.trigger.dataset }}",
+            "cost_center": "{{ .outputs.trigger.op_centrocosto }}",
+            "asset_code": "{{ .outputs.trigger.op_codigo_activo }}",
+            "finops_project": "{{ .outputs.trigger.op_proyecto }}",
+            "leader": "{{ .outputs.trigger.op_lider }}",
+            "provider": "{{ .outputs.trigger.op_proveedor }}",
+            "business_owner": "{{ .outputs.trigger.op_responsable_negocio }}"
+          }
+        },
+        "onFailure": "continue"
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "validate",
+      "title": "Validar solicitud (backend)",
+      "description": "PLACEHOLDER: CrossGH/bigquery-platform manage-bq-table.yml validaciones.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/bq-table/validate",
+        "synchronized": true,
+        "method": "POST",
+        "body": {
+          "port_run_id": "{{ .workflowRun.id }}",
+          "operation": "{{ .outputs.trigger.operation }}",
+          "project_id": "{{ .outputs.trigger.gcp_project }}",
+          "environment": "{{ .outputs.trigger.environment }}",
+          "dataset": "{{ .outputs.trigger.dataset }}",
+          "table_name": "{{ .outputs.trigger.table_name }}",
+          "table_type": "{{ .outputs.trigger.table_type }}",
+          "table_schema": "{{ .outputs.trigger.table_schema }}",
+          "labels": {
+            "op-capa": "{{ .outputs.trigger.op_capa }}",
+            "ogd-origen-tabla": "{{ .outputs.trigger.ogd_origen_tabla }}",
+            "op-asset-owner": "{{ .outputs.trigger.op_asset_owner }}"
+          },
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {
+        "valid": "{{ .result.response.data.valid // true }}",
+        "errors": "{{ .result.response.data.errors // [] }}"
+      },
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    },
+    {
+      "identifier": "check_validation",
+      "title": "Validacion OK?",
+      "config": {
+        "type": "CONDITION",
+        "outlets": [
+          {
+            "identifier": "invalid",
+            "title": "Validacion fallida",
+            "expression": ".outputs.validate.valid == false"
+          }
+        ]
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "mark_rejected",
+      "title": "Marcar solicitud rechazada",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "bq_table",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.dataset }}.{{ .outputs.trigger.table_name }}",
+          "properties": {
+            "provisioning_status": "rejected"
+          }
+        }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    },
+    {
+      "identifier": "execute_terraform",
+      "title": "Ejecutar Terraform / PR",
+      "description": "PLACEHOLDER: dispara manage-bq-table.yml en CrossGH/bigquery-platform.",
+      "config": {
+        "type": "WEBHOOK",
+        "url": "https://example.com/port-hooks/afp/bq-table/execute",
+        "synchronized": true,
+        "method": "POST",
+        "body": {
+          "port_run_id": "{{ .workflowRun.id }}",
+          "operation": "{{ .outputs.trigger.operation }}",
+          "project_id": "{{ .outputs.trigger.gcp_project }}",
+          "environment": "{{ .outputs.trigger.environment }}",
+          "dataset": "{{ .outputs.trigger.dataset }}",
+          "table_name": "{{ .outputs.trigger.table_name }}",
+          "table_type": "{{ .outputs.trigger.table_type }}",
+          "table_schema": "{{ .outputs.trigger.table_schema }}",
+          "requested_by": "{{ .workflowRun.trigger.by.email }}"
+        },
+        "onFailure": "continue"
+      },
+      "variables": {
+        "final_status": "{{ .result.response.data.provisioning_status // \"applied\" }}"
+      },
+      "links": [],
+      "testOutputs": {},
+      "verbose": true
+    },
+    {
+      "identifier": "update_status",
+      "title": "Actualizar estado en catalogo",
+      "config": {
+        "type": "UPSERT_ENTITY",
+        "blueprintIdentifier": "bq_table",
+        "mapping": {
+          "identifier": "{{ .outputs.trigger.dataset }}.{{ .outputs.trigger.table_name }}",
+          "properties": {
+            "provisioning_status": "{{ .outputs.execute_terraform.final_status }}"
+          }
+        }
+      },
+      "variables": {},
+      "links": [],
+      "testOutputs": {},
+      "verbose": false
+    }
+  ],
+  "connections": [
+    { "sourceIdentifier": "trigger", "targetIdentifier": "register_request" },
+    { "sourceIdentifier": "register_request", "targetIdentifier": "validate" },
+    { "sourceIdentifier": "validate", "targetIdentifier": "check_validation" },
+    { "sourceIdentifier": "check_validation", "targetIdentifier": "mark_rejected", "sourceOutletIdentifier": "invalid" },
+    { "sourceIdentifier": "check_validation", "targetIdentifier": "execute_terraform", "fallback": true },
+    { "sourceIdentifier": "execute_terraform", "targetIdentifier": "update_status" }
+  ]
+}
